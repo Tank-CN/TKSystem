@@ -1,0 +1,751 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tk.mapper.BasBusinessMapper" >
+  <cache type="org.mybatis.caches.ehcache.EhcacheCache" />
+  <resultMap id="BaseResultMap" type="com.tk.model.BasBusiness" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="TITLE" property="title" jdbcType="VARCHAR" />
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+    <result column="LONGITUDE" property="longitude" jdbcType="DECIMAL" />
+    <result column="LATITUDE" property="latitude" jdbcType="DECIMAL" />
+    <result column="TYPEID" property="typeid" jdbcType="BIGINT" />
+    <result column="TYPENAME" property="typename" jdbcType="VARCHAR" />
+    <result column="TYPEIID" property="typeiid" jdbcType="BIGINT" />
+    <result column="TYPENNAME" property="typenname" jdbcType="VARCHAR" />
+    <result column="PROVINCEID" property="provinceid" jdbcType="VARCHAR" />
+    <result column="PROVINCENAME" property="provincename" jdbcType="VARCHAR" />
+    <result column="CITYID" property="cityid" jdbcType="VARCHAR" />
+    <result column="CITYNAME" property="cityname" jdbcType="VARCHAR" />
+    <result column="DISTRICTID" property="districtid" jdbcType="VARCHAR" />
+    <result column="DISTRICTNAME" property="districtname" jdbcType="VARCHAR" />
+    <result column="STREETID" property="streetid" jdbcType="VARCHAR" />
+    <result column="STREETNAME" property="streetname" jdbcType="VARCHAR" />
+    <result column="VILLAGEID" property="villageid" jdbcType="VARCHAR" />
+    <result column="VILLAGENAME" property="villagename" jdbcType="VARCHAR" />
+    <result column="PICURL" property="picurl" jdbcType="VARCHAR" />
+    <result column="INFO" property="info" jdbcType="VARCHAR" />
+    <result column="TELEPHONE" property="telephone" jdbcType="VARCHAR" />
+    <result column="SPELL" property="spell" jdbcType="VARCHAR" />
+    <result column="WEBSITE" property="website" jdbcType="VARCHAR" />
+    <result column="SERVERTIME" property="servertime" jdbcType="VARCHAR" />
+    <result column="SCORE" property="score" jdbcType="INTEGER" />
+    <result column="UID" property="uid" jdbcType="BIGINT" />
+    <result column="FLAG" property="flag" jdbcType="TINYINT" />
+    <result column="CREATEDATE" property="createdate" jdbcType="TIMESTAMP" />
+    <result column="CREATEUSER" property="createuser" jdbcType="BIGINT" />
+    <result column="LASTMODIFYUSER" property="lastmodifyuser" jdbcType="BIGINT" />
+    <result column="LASTMODIFYDATE" property="lastmodifydate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.tk.model.BasBusiness" extends="BaseResultMap" >
+    <result column="INTRODUCE" property="introduce" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, TITLE, ADDRESS, LONGITUDE, LATITUDE, TYPEID, TYPENAME, TYPEIID, TYPENNAME, PROVINCEID, 
+    PROVINCENAME, CITYID, CITYNAME, DISTRICTID, DISTRICTNAME, STREETID, STREETNAME, VILLAGEID, 
+    VILLAGENAME, PICURL, INFO, TELEPHONE, SPELL, WEBSITE, SERVERTIME, SCORE, UID, FLAG, 
+    CREATEDATE, CREATEUSER, LASTMODIFYUSER, LASTMODIFYDATE
+  </sql>
+  <sql id="Blob_Column_List" >
+    INTRODUCE
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.tk.model.BasBusinessExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from bas_business
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.tk.model.BasBusinessExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bas_business
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from bas_business
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from bas_business
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.tk.model.BasBusinessExample" >
+    delete from bas_business
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tk.model.BasBusiness" >
+    insert into bas_business (ID, TITLE, ADDRESS, 
+      LONGITUDE, LATITUDE, TYPEID, 
+      TYPENAME, TYPEIID, TYPENNAME, 
+      PROVINCEID, PROVINCENAME, CITYID, 
+      CITYNAME, DISTRICTID, DISTRICTNAME, 
+      STREETID, STREETNAME, VILLAGEID, 
+      VILLAGENAME, PICURL, INFO, 
+      TELEPHONE, SPELL, WEBSITE, 
+      SERVERTIME, SCORE, UID, 
+      FLAG, CREATEDATE, CREATEUSER, 
+      LASTMODIFYUSER, LASTMODIFYDATE, INTRODUCE
+      )
+    values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{longitude,jdbcType=DECIMAL}, #{latitude,jdbcType=DECIMAL}, #{typeid,jdbcType=BIGINT}, 
+      #{typename,jdbcType=VARCHAR}, #{typeiid,jdbcType=BIGINT}, #{typenname,jdbcType=VARCHAR}, 
+      #{provinceid,jdbcType=VARCHAR}, #{provincename,jdbcType=VARCHAR}, #{cityid,jdbcType=VARCHAR}, 
+      #{cityname,jdbcType=VARCHAR}, #{districtid,jdbcType=VARCHAR}, #{districtname,jdbcType=VARCHAR}, 
+      #{streetid,jdbcType=VARCHAR}, #{streetname,jdbcType=VARCHAR}, #{villageid,jdbcType=VARCHAR}, 
+      #{villagename,jdbcType=VARCHAR}, #{picurl,jdbcType=VARCHAR}, #{info,jdbcType=VARCHAR}, 
+      #{telephone,jdbcType=VARCHAR}, #{spell,jdbcType=VARCHAR}, #{website,jdbcType=VARCHAR}, 
+      #{servertime,jdbcType=VARCHAR}, #{score,jdbcType=INTEGER}, #{uid,jdbcType=BIGINT}, 
+      #{flag,jdbcType=TINYINT}, #{createdate,jdbcType=TIMESTAMP}, #{createuser,jdbcType=BIGINT}, 
+      #{lastmodifyuser,jdbcType=BIGINT}, #{lastmodifydate,jdbcType=TIMESTAMP}, #{introduce,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.tk.model.BasBusiness" >
+    insert into bas_business
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="title != null" >
+        TITLE,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+      <if test="longitude != null" >
+        LONGITUDE,
+      </if>
+      <if test="latitude != null" >
+        LATITUDE,
+      </if>
+      <if test="typeid != null" >
+        TYPEID,
+      </if>
+      <if test="typename != null" >
+        TYPENAME,
+      </if>
+      <if test="typeiid != null" >
+        TYPEIID,
+      </if>
+      <if test="typenname != null" >
+        TYPENNAME,
+      </if>
+      <if test="provinceid != null" >
+        PROVINCEID,
+      </if>
+      <if test="provincename != null" >
+        PROVINCENAME,
+      </if>
+      <if test="cityid != null" >
+        CITYID,
+      </if>
+      <if test="cityname != null" >
+        CITYNAME,
+      </if>
+      <if test="districtid != null" >
+        DISTRICTID,
+      </if>
+      <if test="districtname != null" >
+        DISTRICTNAME,
+      </if>
+      <if test="streetid != null" >
+        STREETID,
+      </if>
+      <if test="streetname != null" >
+        STREETNAME,
+      </if>
+      <if test="villageid != null" >
+        VILLAGEID,
+      </if>
+      <if test="villagename != null" >
+        VILLAGENAME,
+      </if>
+      <if test="picurl != null" >
+        PICURL,
+      </if>
+      <if test="info != null" >
+        INFO,
+      </if>
+      <if test="telephone != null" >
+        TELEPHONE,
+      </if>
+      <if test="spell != null" >
+        SPELL,
+      </if>
+      <if test="website != null" >
+        WEBSITE,
+      </if>
+      <if test="servertime != null" >
+        SERVERTIME,
+      </if>
+      <if test="score != null" >
+        SCORE,
+      </if>
+      <if test="uid != null" >
+        UID,
+      </if>
+      <if test="flag != null" >
+        FLAG,
+      </if>
+      <if test="createdate != null" >
+        CREATEDATE,
+      </if>
+      <if test="createuser != null" >
+        CREATEUSER,
+      </if>
+      <if test="lastmodifyuser != null" >
+        LASTMODIFYUSER,
+      </if>
+      <if test="lastmodifydate != null" >
+        LASTMODIFYDATE,
+      </if>
+      <if test="introduce != null" >
+        INTRODUCE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null" >
+        #{longitude,jdbcType=DECIMAL},
+      </if>
+      <if test="latitude != null" >
+        #{latitude,jdbcType=DECIMAL},
+      </if>
+      <if test="typeid != null" >
+        #{typeid,jdbcType=BIGINT},
+      </if>
+      <if test="typename != null" >
+        #{typename,jdbcType=VARCHAR},
+      </if>
+      <if test="typeiid != null" >
+        #{typeiid,jdbcType=BIGINT},
+      </if>
+      <if test="typenname != null" >
+        #{typenname,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceid != null" >
+        #{provinceid,jdbcType=VARCHAR},
+      </if>
+      <if test="provincename != null" >
+        #{provincename,jdbcType=VARCHAR},
+      </if>
+      <if test="cityid != null" >
+        #{cityid,jdbcType=VARCHAR},
+      </if>
+      <if test="cityname != null" >
+        #{cityname,jdbcType=VARCHAR},
+      </if>
+      <if test="districtid != null" >
+        #{districtid,jdbcType=VARCHAR},
+      </if>
+      <if test="districtname != null" >
+        #{districtname,jdbcType=VARCHAR},
+      </if>
+      <if test="streetid != null" >
+        #{streetid,jdbcType=VARCHAR},
+      </if>
+      <if test="streetname != null" >
+        #{streetname,jdbcType=VARCHAR},
+      </if>
+      <if test="villageid != null" >
+        #{villageid,jdbcType=VARCHAR},
+      </if>
+      <if test="villagename != null" >
+        #{villagename,jdbcType=VARCHAR},
+      </if>
+      <if test="picurl != null" >
+        #{picurl,jdbcType=VARCHAR},
+      </if>
+      <if test="info != null" >
+        #{info,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="spell != null" >
+        #{spell,jdbcType=VARCHAR},
+      </if>
+      <if test="website != null" >
+        #{website,jdbcType=VARCHAR},
+      </if>
+      <if test="servertime != null" >
+        #{servertime,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="flag != null" >
+        #{flag,jdbcType=TINYINT},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createuser != null" >
+        #{createuser,jdbcType=BIGINT},
+      </if>
+      <if test="lastmodifyuser != null" >
+        #{lastmodifyuser,jdbcType=BIGINT},
+      </if>
+      <if test="lastmodifydate != null" >
+        #{lastmodifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="introduce != null" >
+        #{introduce,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tk.model.BasBusinessExample" resultType="java.lang.Integer" >
+    select count(*) from bas_business
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bas_business
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.title != null" >
+        TITLE = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        ADDRESS = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.longitude != null" >
+        LONGITUDE = #{record.longitude,jdbcType=DECIMAL},
+      </if>
+      <if test="record.latitude != null" >
+        LATITUDE = #{record.latitude,jdbcType=DECIMAL},
+      </if>
+      <if test="record.typeid != null" >
+        TYPEID = #{record.typeid,jdbcType=BIGINT},
+      </if>
+      <if test="record.typename != null" >
+        TYPENAME = #{record.typename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typeiid != null" >
+        TYPEIID = #{record.typeiid,jdbcType=BIGINT},
+      </if>
+      <if test="record.typenname != null" >
+        TYPENNAME = #{record.typenname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.provinceid != null" >
+        PROVINCEID = #{record.provinceid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.provincename != null" >
+        PROVINCENAME = #{record.provincename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cityid != null" >
+        CITYID = #{record.cityid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cityname != null" >
+        CITYNAME = #{record.cityname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.districtid != null" >
+        DISTRICTID = #{record.districtid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.districtname != null" >
+        DISTRICTNAME = #{record.districtname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.streetid != null" >
+        STREETID = #{record.streetid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.streetname != null" >
+        STREETNAME = #{record.streetname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.villageid != null" >
+        VILLAGEID = #{record.villageid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.villagename != null" >
+        VILLAGENAME = #{record.villagename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.picurl != null" >
+        PICURL = #{record.picurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.info != null" >
+        INFO = #{record.info,jdbcType=VARCHAR},
+      </if>
+      <if test="record.telephone != null" >
+        TELEPHONE = #{record.telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spell != null" >
+        SPELL = #{record.spell,jdbcType=VARCHAR},
+      </if>
+      <if test="record.website != null" >
+        WEBSITE = #{record.website,jdbcType=VARCHAR},
+      </if>
+      <if test="record.servertime != null" >
+        SERVERTIME = #{record.servertime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.score != null" >
+        SCORE = #{record.score,jdbcType=INTEGER},
+      </if>
+      <if test="record.uid != null" >
+        UID = #{record.uid,jdbcType=BIGINT},
+      </if>
+      <if test="record.flag != null" >
+        FLAG = #{record.flag,jdbcType=TINYINT},
+      </if>
+      <if test="record.createdate != null" >
+        CREATEDATE = #{record.createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createuser != null" >
+        CREATEUSER = #{record.createuser,jdbcType=BIGINT},
+      </if>
+      <if test="record.lastmodifyuser != null" >
+        LASTMODIFYUSER = #{record.lastmodifyuser,jdbcType=BIGINT},
+      </if>
+      <if test="record.lastmodifydate != null" >
+        LASTMODIFYDATE = #{record.lastmodifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.introduce != null" >
+        INTRODUCE = #{record.introduce,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update bas_business
+    set ID = #{record.id,jdbcType=BIGINT},
+      TITLE = #{record.title,jdbcType=VARCHAR},
+      ADDRESS = #{record.address,jdbcType=VARCHAR},
+      LONGITUDE = #{record.longitude,jdbcType=DECIMAL},
+      LATITUDE = #{record.latitude,jdbcType=DECIMAL},
+      TYPEID = #{record.typeid,jdbcType=BIGINT},
+      TYPENAME = #{record.typename,jdbcType=VARCHAR},
+      TYPEIID = #{record.typeiid,jdbcType=BIGINT},
+      TYPENNAME = #{record.typenname,jdbcType=VARCHAR},
+      PROVINCEID = #{record.provinceid,jdbcType=VARCHAR},
+      PROVINCENAME = #{record.provincename,jdbcType=VARCHAR},
+      CITYID = #{record.cityid,jdbcType=VARCHAR},
+      CITYNAME = #{record.cityname,jdbcType=VARCHAR},
+      DISTRICTID = #{record.districtid,jdbcType=VARCHAR},
+      DISTRICTNAME = #{record.districtname,jdbcType=VARCHAR},
+      STREETID = #{record.streetid,jdbcType=VARCHAR},
+      STREETNAME = #{record.streetname,jdbcType=VARCHAR},
+      VILLAGEID = #{record.villageid,jdbcType=VARCHAR},
+      VILLAGENAME = #{record.villagename,jdbcType=VARCHAR},
+      PICURL = #{record.picurl,jdbcType=VARCHAR},
+      INFO = #{record.info,jdbcType=VARCHAR},
+      TELEPHONE = #{record.telephone,jdbcType=VARCHAR},
+      SPELL = #{record.spell,jdbcType=VARCHAR},
+      WEBSITE = #{record.website,jdbcType=VARCHAR},
+      SERVERTIME = #{record.servertime,jdbcType=VARCHAR},
+      SCORE = #{record.score,jdbcType=INTEGER},
+      UID = #{record.uid,jdbcType=BIGINT},
+      FLAG = #{record.flag,jdbcType=TINYINT},
+      CREATEDATE = #{record.createdate,jdbcType=TIMESTAMP},
+      CREATEUSER = #{record.createuser,jdbcType=BIGINT},
+      LASTMODIFYUSER = #{record.lastmodifyuser,jdbcType=BIGINT},
+      LASTMODIFYDATE = #{record.lastmodifydate,jdbcType=TIMESTAMP},
+      INTRODUCE = #{record.introduce,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bas_business
+    set ID = #{record.id,jdbcType=BIGINT},
+      TITLE = #{record.title,jdbcType=VARCHAR},
+      ADDRESS = #{record.address,jdbcType=VARCHAR},
+      LONGITUDE = #{record.longitude,jdbcType=DECIMAL},
+      LATITUDE = #{record.latitude,jdbcType=DECIMAL},
+      TYPEID = #{record.typeid,jdbcType=BIGINT},
+      TYPENAME = #{record.typename,jdbcType=VARCHAR},
+      TYPEIID = #{record.typeiid,jdbcType=BIGINT},
+      TYPENNAME = #{record.typenname,jdbcType=VARCHAR},
+      PROVINCEID = #{record.provinceid,jdbcType=VARCHAR},
+      PROVINCENAME = #{record.provincename,jdbcType=VARCHAR},
+      CITYID = #{record.cityid,jdbcType=VARCHAR},
+      CITYNAME = #{record.cityname,jdbcType=VARCHAR},
+      DISTRICTID = #{record.districtid,jdbcType=VARCHAR},
+      DISTRICTNAME = #{record.districtname,jdbcType=VARCHAR},
+      STREETID = #{record.streetid,jdbcType=VARCHAR},
+      STREETNAME = #{record.streetname,jdbcType=VARCHAR},
+      VILLAGEID = #{record.villageid,jdbcType=VARCHAR},
+      VILLAGENAME = #{record.villagename,jdbcType=VARCHAR},
+      PICURL = #{record.picurl,jdbcType=VARCHAR},
+      INFO = #{record.info,jdbcType=VARCHAR},
+      TELEPHONE = #{record.telephone,jdbcType=VARCHAR},
+      SPELL = #{record.spell,jdbcType=VARCHAR},
+      WEBSITE = #{record.website,jdbcType=VARCHAR},
+      SERVERTIME = #{record.servertime,jdbcType=VARCHAR},
+      SCORE = #{record.score,jdbcType=INTEGER},
+      UID = #{record.uid,jdbcType=BIGINT},
+      FLAG = #{record.flag,jdbcType=TINYINT},
+      CREATEDATE = #{record.createdate,jdbcType=TIMESTAMP},
+      CREATEUSER = #{record.createuser,jdbcType=BIGINT},
+      LASTMODIFYUSER = #{record.lastmodifyuser,jdbcType=BIGINT},
+      LASTMODIFYDATE = #{record.lastmodifydate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tk.model.BasBusiness" >
+    update bas_business
+    <set >
+      <if test="title != null" >
+        TITLE = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null" >
+        LONGITUDE = #{longitude,jdbcType=DECIMAL},
+      </if>
+      <if test="latitude != null" >
+        LATITUDE = #{latitude,jdbcType=DECIMAL},
+      </if>
+      <if test="typeid != null" >
+        TYPEID = #{typeid,jdbcType=BIGINT},
+      </if>
+      <if test="typename != null" >
+        TYPENAME = #{typename,jdbcType=VARCHAR},
+      </if>
+      <if test="typeiid != null" >
+        TYPEIID = #{typeiid,jdbcType=BIGINT},
+      </if>
+      <if test="typenname != null" >
+        TYPENNAME = #{typenname,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceid != null" >
+        PROVINCEID = #{provinceid,jdbcType=VARCHAR},
+      </if>
+      <if test="provincename != null" >
+        PROVINCENAME = #{provincename,jdbcType=VARCHAR},
+      </if>
+      <if test="cityid != null" >
+        CITYID = #{cityid,jdbcType=VARCHAR},
+      </if>
+      <if test="cityname != null" >
+        CITYNAME = #{cityname,jdbcType=VARCHAR},
+      </if>
+      <if test="districtid != null" >
+        DISTRICTID = #{districtid,jdbcType=VARCHAR},
+      </if>
+      <if test="districtname != null" >
+        DISTRICTNAME = #{districtname,jdbcType=VARCHAR},
+      </if>
+      <if test="streetid != null" >
+        STREETID = #{streetid,jdbcType=VARCHAR},
+      </if>
+      <if test="streetname != null" >
+        STREETNAME = #{streetname,jdbcType=VARCHAR},
+      </if>
+      <if test="villageid != null" >
+        VILLAGEID = #{villageid,jdbcType=VARCHAR},
+      </if>
+      <if test="villagename != null" >
+        VILLAGENAME = #{villagename,jdbcType=VARCHAR},
+      </if>
+      <if test="picurl != null" >
+        PICURL = #{picurl,jdbcType=VARCHAR},
+      </if>
+      <if test="info != null" >
+        INFO = #{info,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        TELEPHONE = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="spell != null" >
+        SPELL = #{spell,jdbcType=VARCHAR},
+      </if>
+      <if test="website != null" >
+        WEBSITE = #{website,jdbcType=VARCHAR},
+      </if>
+      <if test="servertime != null" >
+        SERVERTIME = #{servertime,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null" >
+        SCORE = #{score,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null" >
+        UID = #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="flag != null" >
+        FLAG = #{flag,jdbcType=TINYINT},
+      </if>
+      <if test="createdate != null" >
+        CREATEDATE = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createuser != null" >
+        CREATEUSER = #{createuser,jdbcType=BIGINT},
+      </if>
+      <if test="lastmodifyuser != null" >
+        LASTMODIFYUSER = #{lastmodifyuser,jdbcType=BIGINT},
+      </if>
+      <if test="lastmodifydate != null" >
+        LASTMODIFYDATE = #{lastmodifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="introduce != null" >
+        INTRODUCE = #{introduce,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.tk.model.BasBusiness" >
+    update bas_business
+    set TITLE = #{title,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      LONGITUDE = #{longitude,jdbcType=DECIMAL},
+      LATITUDE = #{latitude,jdbcType=DECIMAL},
+      TYPEID = #{typeid,jdbcType=BIGINT},
+      TYPENAME = #{typename,jdbcType=VARCHAR},
+      TYPEIID = #{typeiid,jdbcType=BIGINT},
+      TYPENNAME = #{typenname,jdbcType=VARCHAR},
+      PROVINCEID = #{provinceid,jdbcType=VARCHAR},
+      PROVINCENAME = #{provincename,jdbcType=VARCHAR},
+      CITYID = #{cityid,jdbcType=VARCHAR},
+      CITYNAME = #{cityname,jdbcType=VARCHAR},
+      DISTRICTID = #{districtid,jdbcType=VARCHAR},
+      DISTRICTNAME = #{districtname,jdbcType=VARCHAR},
+      STREETID = #{streetid,jdbcType=VARCHAR},
+      STREETNAME = #{streetname,jdbcType=VARCHAR},
+      VILLAGEID = #{villageid,jdbcType=VARCHAR},
+      VILLAGENAME = #{villagename,jdbcType=VARCHAR},
+      PICURL = #{picurl,jdbcType=VARCHAR},
+      INFO = #{info,jdbcType=VARCHAR},
+      TELEPHONE = #{telephone,jdbcType=VARCHAR},
+      SPELL = #{spell,jdbcType=VARCHAR},
+      WEBSITE = #{website,jdbcType=VARCHAR},
+      SERVERTIME = #{servertime,jdbcType=VARCHAR},
+      SCORE = #{score,jdbcType=INTEGER},
+      UID = #{uid,jdbcType=BIGINT},
+      FLAG = #{flag,jdbcType=TINYINT},
+      CREATEDATE = #{createdate,jdbcType=TIMESTAMP},
+      CREATEUSER = #{createuser,jdbcType=BIGINT},
+      LASTMODIFYUSER = #{lastmodifyuser,jdbcType=BIGINT},
+      LASTMODIFYDATE = #{lastmodifydate,jdbcType=TIMESTAMP},
+      INTRODUCE = #{introduce,jdbcType=LONGVARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tk.model.BasBusiness" >
+    update bas_business
+    set TITLE = #{title,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      LONGITUDE = #{longitude,jdbcType=DECIMAL},
+      LATITUDE = #{latitude,jdbcType=DECIMAL},
+      TYPEID = #{typeid,jdbcType=BIGINT},
+      TYPENAME = #{typename,jdbcType=VARCHAR},
+      TYPEIID = #{typeiid,jdbcType=BIGINT},
+      TYPENNAME = #{typenname,jdbcType=VARCHAR},
+      PROVINCEID = #{provinceid,jdbcType=VARCHAR},
+      PROVINCENAME = #{provincename,jdbcType=VARCHAR},
+      CITYID = #{cityid,jdbcType=VARCHAR},
+      CITYNAME = #{cityname,jdbcType=VARCHAR},
+      DISTRICTID = #{districtid,jdbcType=VARCHAR},
+      DISTRICTNAME = #{districtname,jdbcType=VARCHAR},
+      STREETID = #{streetid,jdbcType=VARCHAR},
+      STREETNAME = #{streetname,jdbcType=VARCHAR},
+      VILLAGEID = #{villageid,jdbcType=VARCHAR},
+      VILLAGENAME = #{villagename,jdbcType=VARCHAR},
+      PICURL = #{picurl,jdbcType=VARCHAR},
+      INFO = #{info,jdbcType=VARCHAR},
+      TELEPHONE = #{telephone,jdbcType=VARCHAR},
+      SPELL = #{spell,jdbcType=VARCHAR},
+      WEBSITE = #{website,jdbcType=VARCHAR},
+      SERVERTIME = #{servertime,jdbcType=VARCHAR},
+      SCORE = #{score,jdbcType=INTEGER},
+      UID = #{uid,jdbcType=BIGINT},
+      FLAG = #{flag,jdbcType=TINYINT},
+      CREATEDATE = #{createdate,jdbcType=TIMESTAMP},
+      CREATEUSER = #{createuser,jdbcType=BIGINT},
+      LASTMODIFYUSER = #{lastmodifyuser,jdbcType=BIGINT},
+      LASTMODIFYDATE = #{lastmodifydate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

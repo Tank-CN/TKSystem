@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tk.mapper.ex.DynamicExMapper">
+    <cache-ref namespace="com.tk.mapper.DynamicMapper" />
+    <insert id="insertBackId" parameterType="com.tk.model.Dynamic" keyProperty="id" useGeneratedKeys="true">
+        insert into dynamic
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                ID,
+            </if>
+            <if test="uid != null">
+                UID,
+            </if>
+            <if test="title != null">
+                TITLE,
+            </if>
+            <if test="content != null">
+                CONTENT,
+            </if>
+            <if test="longitude != null">
+                LONGITUDE,
+            </if>
+            <if test="latitude != null">
+                LATITUDE,
+            </if>
+            <if test="address != null">
+                ADDRESS,
+            </if>
+            <if test="status != null">
+                STATUS,
+            </if>
+            <if test="imgurl != null">
+                IMGURL,
+            </if>
+            <if test="createdate != null">
+                CREATEDATE,
+            </if>
+            <if test="replycount != null">
+                REPLYCOUNT,
+            </if>
+            <if test="likecount != null">
+                LIKECOUNT,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="uid != null">
+                #{uid,jdbcType=BIGINT},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="longitude != null">
+                #{longitude,jdbcType=DECIMAL},
+            </if>
+            <if test="latitude != null">
+                #{latitude,jdbcType=DECIMAL},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=TINYINT},
+            </if>
+            <if test="imgurl != null">
+                #{imgurl,jdbcType=VARCHAR},
+            </if>
+            <if test="createdate != null">
+                #{createdate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="replycount != null">
+                #{replycount,jdbcType=INTEGER},
+            </if>
+            <if test="likecount != null">
+                #{likecount,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="replyCountadd1" parameterType="map">
+    update dynamic
+    set REPLYCOUNT = REPLYCOUNT+1 WHERE id=#{id}
+    </update>
+
+    <update id="likeCountadd1" parameterType="map">
+    update dynamic
+    set LIKECOUNT = LIKECOUNT+1 WHERE id=#{id}
+    </update>
+
+
+    <update id="replyCountsub1" parameterType="map">
+        update dynamic
+        set REPLYCOUNT = REPLYCOUNT-1 WHERE id=#{id}
+    </update>
+
+    <update id="likeCountsub1" parameterType="map">
+        update dynamic
+        set LIKECOUNT = LIKECOUNT-1 WHERE id=#{id}
+    </update>
+
+</mapper>

@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tk.mapper.BasUserDeviceMapper" >
+  <cache type="org.mybatis.caches.ehcache.EhcacheCache" />
+  <resultMap id="BaseResultMap" type="com.tk.model.BasUserDevice" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="UID" property="uid" jdbcType="BIGINT" />
+    <result column="APPTYPE" property="apptype" jdbcType="TINYINT" />
+    <result column="DEVICE_ID" property="deviceId" jdbcType="VARCHAR" />
+    <result column="UNIQUECODE" property="uniquecode" jdbcType="VARCHAR" />
+    <result column="UNIQUECODE1" property="uniquecode1" jdbcType="VARCHAR" />
+    <result column="DEVICE_NAME" property="deviceName" jdbcType="VARCHAR" />
+    <result column="DEVICE_SYS_NAME" property="deviceSysName" jdbcType="VARCHAR" />
+    <result column="DEVICE_SYS_VERSION" property="deviceSysVersion" jdbcType="VARCHAR" />
+    <result column="PHONE_MODEL" property="phoneModel" jdbcType="VARCHAR" />
+    <result column="LANG" property="lang" jdbcType="VARCHAR" />
+    <result column="TYPE" property="type" jdbcType="TINYINT" />
+    <result column="GMT_MODIFIED" property="gmtModified" jdbcType="TIMESTAMP" />
+    <result column="MODIFYDATE" property="modifydate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, UID, APPTYPE, DEVICE_ID, UNIQUECODE, UNIQUECODE1, DEVICE_NAME, DEVICE_SYS_NAME, 
+    DEVICE_SYS_VERSION, PHONE_MODEL, LANG, TYPE, GMT_MODIFIED, MODIFYDATE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.tk.model.BasUserDeviceExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bas_user_device
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from bas_user_device
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from bas_user_device
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.tk.model.BasUserDeviceExample" >
+    delete from bas_user_device
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tk.model.BasUserDevice" >
+    insert into bas_user_device (ID, UID, APPTYPE, 
+      DEVICE_ID, UNIQUECODE, UNIQUECODE1, 
+      DEVICE_NAME, DEVICE_SYS_NAME, DEVICE_SYS_VERSION, 
+      PHONE_MODEL, LANG, TYPE, 
+      GMT_MODIFIED, MODIFYDATE)
+    values (#{id,jdbcType=BIGINT}, #{uid,jdbcType=BIGINT}, #{apptype,jdbcType=TINYINT}, 
+      #{deviceId,jdbcType=VARCHAR}, #{uniquecode,jdbcType=VARCHAR}, #{uniquecode1,jdbcType=VARCHAR}, 
+      #{deviceName,jdbcType=VARCHAR}, #{deviceSysName,jdbcType=VARCHAR}, #{deviceSysVersion,jdbcType=VARCHAR}, 
+      #{phoneModel,jdbcType=VARCHAR}, #{lang,jdbcType=VARCHAR}, #{type,jdbcType=TINYINT}, 
+      #{gmtModified,jdbcType=TIMESTAMP}, #{modifydate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tk.model.BasUserDevice" >
+    insert into bas_user_device
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="uid != null" >
+        UID,
+      </if>
+      <if test="apptype != null" >
+        APPTYPE,
+      </if>
+      <if test="deviceId != null" >
+        DEVICE_ID,
+      </if>
+      <if test="uniquecode != null" >
+        UNIQUECODE,
+      </if>
+      <if test="uniquecode1 != null" >
+        UNIQUECODE1,
+      </if>
+      <if test="deviceName != null" >
+        DEVICE_NAME,
+      </if>
+      <if test="deviceSysName != null" >
+        DEVICE_SYS_NAME,
+      </if>
+      <if test="deviceSysVersion != null" >
+        DEVICE_SYS_VERSION,
+      </if>
+      <if test="phoneModel != null" >
+        PHONE_MODEL,
+      </if>
+      <if test="lang != null" >
+        LANG,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="gmtModified != null" >
+        GMT_MODIFIED,
+      </if>
+      <if test="modifydate != null" >
+        MODIFYDATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="apptype != null" >
+        #{apptype,jdbcType=TINYINT},
+      </if>
+      <if test="deviceId != null" >
+        #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="uniquecode != null" >
+        #{uniquecode,jdbcType=VARCHAR},
+      </if>
+      <if test="uniquecode1 != null" >
+        #{uniquecode1,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceName != null" >
+        #{deviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceSysName != null" >
+        #{deviceSysName,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceSysVersion != null" >
+        #{deviceSysVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneModel != null" >
+        #{phoneModel,jdbcType=VARCHAR},
+      </if>
+      <if test="lang != null" >
+        #{lang,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="gmtModified != null" >
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydate != null" >
+        #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tk.model.BasUserDeviceExample" resultType="java.lang.Integer" >
+    select count(*) from bas_user_device
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bas_user_device
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.uid != null" >
+        UID = #{record.uid,jdbcType=BIGINT},
+      </if>
+      <if test="record.apptype != null" >
+        APPTYPE = #{record.apptype,jdbcType=TINYINT},
+      </if>
+      <if test="record.deviceId != null" >
+        DEVICE_ID = #{record.deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uniquecode != null" >
+        UNIQUECODE = #{record.uniquecode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uniquecode1 != null" >
+        UNIQUECODE1 = #{record.uniquecode1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceName != null" >
+        DEVICE_NAME = #{record.deviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceSysName != null" >
+        DEVICE_SYS_NAME = #{record.deviceSysName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceSysVersion != null" >
+        DEVICE_SYS_VERSION = #{record.deviceSysVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phoneModel != null" >
+        PHONE_MODEL = #{record.phoneModel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lang != null" >
+        LANG = #{record.lang,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        TYPE = #{record.type,jdbcType=TINYINT},
+      </if>
+      <if test="record.gmtModified != null" >
+        GMT_MODIFIED = #{record.gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifydate != null" >
+        MODIFYDATE = #{record.modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bas_user_device
+    set ID = #{record.id,jdbcType=BIGINT},
+      UID = #{record.uid,jdbcType=BIGINT},
+      APPTYPE = #{record.apptype,jdbcType=TINYINT},
+      DEVICE_ID = #{record.deviceId,jdbcType=VARCHAR},
+      UNIQUECODE = #{record.uniquecode,jdbcType=VARCHAR},
+      UNIQUECODE1 = #{record.uniquecode1,jdbcType=VARCHAR},
+      DEVICE_NAME = #{record.deviceName,jdbcType=VARCHAR},
+      DEVICE_SYS_NAME = #{record.deviceSysName,jdbcType=VARCHAR},
+      DEVICE_SYS_VERSION = #{record.deviceSysVersion,jdbcType=VARCHAR},
+      PHONE_MODEL = #{record.phoneModel,jdbcType=VARCHAR},
+      LANG = #{record.lang,jdbcType=VARCHAR},
+      TYPE = #{record.type,jdbcType=TINYINT},
+      GMT_MODIFIED = #{record.gmtModified,jdbcType=TIMESTAMP},
+      MODIFYDATE = #{record.modifydate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tk.model.BasUserDevice" >
+    update bas_user_device
+    <set >
+      <if test="uid != null" >
+        UID = #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="apptype != null" >
+        APPTYPE = #{apptype,jdbcType=TINYINT},
+      </if>
+      <if test="deviceId != null" >
+        DEVICE_ID = #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="uniquecode != null" >
+        UNIQUECODE = #{uniquecode,jdbcType=VARCHAR},
+      </if>
+      <if test="uniquecode1 != null" >
+        UNIQUECODE1 = #{uniquecode1,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceName != null" >
+        DEVICE_NAME = #{deviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceSysName != null" >
+        DEVICE_SYS_NAME = #{deviceSysName,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceSysVersion != null" >
+        DEVICE_SYS_VERSION = #{deviceSysVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneModel != null" >
+        PHONE_MODEL = #{phoneModel,jdbcType=VARCHAR},
+      </if>
+      <if test="lang != null" >
+        LANG = #{lang,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        TYPE = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="gmtModified != null" >
+        GMT_MODIFIED = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydate != null" >
+        MODIFYDATE = #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tk.model.BasUserDevice" >
+    update bas_user_device
+    set UID = #{uid,jdbcType=BIGINT},
+      APPTYPE = #{apptype,jdbcType=TINYINT},
+      DEVICE_ID = #{deviceId,jdbcType=VARCHAR},
+      UNIQUECODE = #{uniquecode,jdbcType=VARCHAR},
+      UNIQUECODE1 = #{uniquecode1,jdbcType=VARCHAR},
+      DEVICE_NAME = #{deviceName,jdbcType=VARCHAR},
+      DEVICE_SYS_NAME = #{deviceSysName,jdbcType=VARCHAR},
+      DEVICE_SYS_VERSION = #{deviceSysVersion,jdbcType=VARCHAR},
+      PHONE_MODEL = #{phoneModel,jdbcType=VARCHAR},
+      LANG = #{lang,jdbcType=VARCHAR},
+      TYPE = #{type,jdbcType=TINYINT},
+      GMT_MODIFIED = #{gmtModified,jdbcType=TIMESTAMP},
+      MODIFYDATE = #{modifydate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

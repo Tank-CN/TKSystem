@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tk.mapper.BasAppVersionMapper" >
+  <cache type="org.mybatis.caches.ehcache.EhcacheCache" />
+  <resultMap id="BaseResultMap" type="com.tk.model.BasAppVersion" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="APPNAME" property="appname" jdbcType="VARCHAR" />
+    <result column="APPCODE" property="appcode" jdbcType="VARCHAR" />
+    <result column="APPVERSION" property="appversion" jdbcType="INTEGER" />
+    <result column="TYPE" property="type" jdbcType="VARCHAR" />
+    <result column="DES" property="des" jdbcType="VARCHAR" />
+    <result column="APPURL" property="appurl" jdbcType="VARCHAR" />
+    <result column="CREATEDATE" property="createdate" jdbcType="TIMESTAMP" />
+    <result column="CREATEUSER" property="createuser" jdbcType="BIGINT" />
+    <result column="MODIFYDATE" property="modifydate" jdbcType="TIMESTAMP" />
+    <result column="MODIFYUSER" property="modifyuser" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, APPNAME, APPCODE, APPVERSION, TYPE, DES, APPURL, CREATEDATE, CREATEUSER, MODIFYDATE, 
+    MODIFYUSER
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.tk.model.BasAppVersionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bas_app_version
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from bas_app_version
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from bas_app_version
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.tk.model.BasAppVersionExample" >
+    delete from bas_app_version
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tk.model.BasAppVersion" >
+    insert into bas_app_version (ID, APPNAME, APPCODE, 
+      APPVERSION, TYPE, DES, 
+      APPURL, CREATEDATE, CREATEUSER, 
+      MODIFYDATE, MODIFYUSER)
+    values (#{id,jdbcType=BIGINT}, #{appname,jdbcType=VARCHAR}, #{appcode,jdbcType=VARCHAR}, 
+      #{appversion,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{des,jdbcType=VARCHAR}, 
+      #{appurl,jdbcType=VARCHAR}, #{createdate,jdbcType=TIMESTAMP}, #{createuser,jdbcType=BIGINT}, 
+      #{modifydate,jdbcType=TIMESTAMP}, #{modifyuser,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tk.model.BasAppVersion" >
+    insert into bas_app_version
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="appname != null" >
+        APPNAME,
+      </if>
+      <if test="appcode != null" >
+        APPCODE,
+      </if>
+      <if test="appversion != null" >
+        APPVERSION,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="des != null" >
+        DES,
+      </if>
+      <if test="appurl != null" >
+        APPURL,
+      </if>
+      <if test="createdate != null" >
+        CREATEDATE,
+      </if>
+      <if test="createuser != null" >
+        CREATEUSER,
+      </if>
+      <if test="modifydate != null" >
+        MODIFYDATE,
+      </if>
+      <if test="modifyuser != null" >
+        MODIFYUSER,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="appname != null" >
+        #{appname,jdbcType=VARCHAR},
+      </if>
+      <if test="appcode != null" >
+        #{appcode,jdbcType=VARCHAR},
+      </if>
+      <if test="appversion != null" >
+        #{appversion,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="des != null" >
+        #{des,jdbcType=VARCHAR},
+      </if>
+      <if test="appurl != null" >
+        #{appurl,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createuser != null" >
+        #{createuser,jdbcType=BIGINT},
+      </if>
+      <if test="modifydate != null" >
+        #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyuser != null" >
+        #{modifyuser,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tk.model.BasAppVersionExample" resultType="java.lang.Integer" >
+    select count(*) from bas_app_version
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bas_app_version
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.appname != null" >
+        APPNAME = #{record.appname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appcode != null" >
+        APPCODE = #{record.appcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appversion != null" >
+        APPVERSION = #{record.appversion,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null" >
+        TYPE = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.des != null" >
+        DES = #{record.des,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appurl != null" >
+        APPURL = #{record.appurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdate != null" >
+        CREATEDATE = #{record.createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createuser != null" >
+        CREATEUSER = #{record.createuser,jdbcType=BIGINT},
+      </if>
+      <if test="record.modifydate != null" >
+        MODIFYDATE = #{record.modifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifyuser != null" >
+        MODIFYUSER = #{record.modifyuser,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bas_app_version
+    set ID = #{record.id,jdbcType=BIGINT},
+      APPNAME = #{record.appname,jdbcType=VARCHAR},
+      APPCODE = #{record.appcode,jdbcType=VARCHAR},
+      APPVERSION = #{record.appversion,jdbcType=INTEGER},
+      TYPE = #{record.type,jdbcType=VARCHAR},
+      DES = #{record.des,jdbcType=VARCHAR},
+      APPURL = #{record.appurl,jdbcType=VARCHAR},
+      CREATEDATE = #{record.createdate,jdbcType=TIMESTAMP},
+      CREATEUSER = #{record.createuser,jdbcType=BIGINT},
+      MODIFYDATE = #{record.modifydate,jdbcType=TIMESTAMP},
+      MODIFYUSER = #{record.modifyuser,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tk.model.BasAppVersion" >
+    update bas_app_version
+    <set >
+      <if test="appname != null" >
+        APPNAME = #{appname,jdbcType=VARCHAR},
+      </if>
+      <if test="appcode != null" >
+        APPCODE = #{appcode,jdbcType=VARCHAR},
+      </if>
+      <if test="appversion != null" >
+        APPVERSION = #{appversion,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        TYPE = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="des != null" >
+        DES = #{des,jdbcType=VARCHAR},
+      </if>
+      <if test="appurl != null" >
+        APPURL = #{appurl,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        CREATEDATE = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createuser != null" >
+        CREATEUSER = #{createuser,jdbcType=BIGINT},
+      </if>
+      <if test="modifydate != null" >
+        MODIFYDATE = #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyuser != null" >
+        MODIFYUSER = #{modifyuser,jdbcType=BIGINT},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tk.model.BasAppVersion" >
+    update bas_app_version
+    set APPNAME = #{appname,jdbcType=VARCHAR},
+      APPCODE = #{appcode,jdbcType=VARCHAR},
+      APPVERSION = #{appversion,jdbcType=INTEGER},
+      TYPE = #{type,jdbcType=VARCHAR},
+      DES = #{des,jdbcType=VARCHAR},
+      APPURL = #{appurl,jdbcType=VARCHAR},
+      CREATEDATE = #{createdate,jdbcType=TIMESTAMP},
+      CREATEUSER = #{createuser,jdbcType=BIGINT},
+      MODIFYDATE = #{modifydate,jdbcType=TIMESTAMP},
+      MODIFYUSER = #{modifyuser,jdbcType=BIGINT}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

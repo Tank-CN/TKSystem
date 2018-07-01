@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tk.mapper.ex.SysModuleExMapper">
+
+	<cache-ref namespace="com.tk.mapper.SysModuleMapper" />
+	<resultMap id="BaseResultMap" type="com.tk.model.SysModule" extends="com.tk.mapper.SysModuleMapper.BaseResultMap">
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, TITLE, INTRO, URL, LEVEL, PCODE, CODE, ICO, FLAG, CREATEDATE,
+		CREATEUSER, MODIFYDATE,
+		MODIFYUSER
+	</sql>
+	<select id="selectByUser" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM
+		sys_module
+		WHERE
+		id IN (
+		SELECT DISTINCT
+		sys_role_module.MID
+		FROM
+		sys_role,
+		sys_role_module,
+		sys_module,
+		sys_user_role
+		WHERE
+		sys_user_role.RID = sys_role.id
+		AND sys_role.ID = sys_role_module.RID
+		AND
+		sys_role_module.MID = sys_module.ID
+		AND sys_role.FLAG = 1
+		AND sys_user_role.UID = #{userId,jdbcType=BIGINT}
+		)
+		AND flag=1
+		ORDER BY PCODE ASC , ID ASC
+	</select>
+
+
+	<select id="selectByRole" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM
+		sys_module
+		WHERE
+		id IN (
+		SELECT DISTINCT
+		sys_role_module.MID
+		FROM
+		sys_role,
+		sys_role_module,
+		sys_module,
+		sys_user_role
+		WHERE
+		sys_user_role.RID = sys_role.id
+		AND sys_role.ID = sys_role_module.RID
+		AND
+		sys_role_module.MID = sys_module.ID
+		AND sys_role.FLAG = 1
+		AND sys_user_role.RID = #{rid,jdbcType=BIGINT}
+		)
+		AND flag=1
+		ORDER BY PCODE ASC , ID ASC
+	</select>
+</mapper>

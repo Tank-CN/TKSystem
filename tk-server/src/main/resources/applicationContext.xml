@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd http://www.springframework.org/schema/aop  
+    	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+    	http://www.springframework.org/schema/task  
+		http://www.springframework.org/schema/task/spring-task-3.1.xsd"
+       default-lazy-init="true">
+
+    <description>Spring公共配置</description>
+
+    <!-- spring 任务调度 task任务扫描注解 -->
+    <task:annotation-driven/>
+
+    <context:property-placeholder ignore-unresolvable="true" location="classpath*:db.properties"/>
+    <context:property-placeholder ignore-unresolvable="true" location="classpath*:params.properties"/>
+
+    <context:component-scan base-package="com.tk">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <!-- 配置文件上传，如果没有使用文件上传可以不用配置，当然如果不配，那么配置文件中也不必引入上传组件包 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- 默认编码 -->
+        <property name="defaultEncoding" value="utf-8" />
+        <!-- 文件大小最大值 -->
+        <property name="maxUploadSize" value="10485760000" />
+        <!-- 内存中的最大值 -->
+        <property name="maxInMemorySize" value="40960" />
+    </bean>
+
+    <!-- MyBatis配置 -->
+    <!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+        <!-- 自动扫描entity目录, 省掉Configuration.xml里的手工配置 -->
+        <property name="typeAliasesPackage" value="com.tk.model"/>
+        <!-- 显式指定Mapper文件位置 -->
+        <!-- 自动扫描mapping.xml文件 -->
+        <property name="mapperLocations" value="classpath*:/mybatis/**/*Mapper.xml"/>
+    </bean>
+
+    <!-- 扫描basePackage下所有以@MyBatisRepository标识的 接口 -->
+    <!-- DAO接口所在包名，Spring会自动查找其下的类 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.tk.mapper"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+        <property name="annotationClass" value="com.bs.util.annotation.BatisRepository"/>
+    </bean>
+
+
+    <!-- Spring 的事务命名空间 -->
+    <!-- <tx:jta-transaction-manager /> -->
+    <!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+
+    <!-- 使用Druid的内置监控 -->
+    <bean id="stat-filter" class="com.alibaba.druid.filter.stat.StatFilter">
+        <property name="mergeSql" value="true"/>
+        <property name="slowSqlMillis" value="10000"/>
+        <property name="logSlowSql" value="true"/>
+    </bean>
+
+    <!-- 防御SQL注入攻击 -->
+    <bean id="wall-filter-config" class="com.alibaba.druid.wall.WallConfig" init-method="init">
+        <!-- 指定配置装载的目录 -->
+        <property name="dir" value="META-INF/druid/wall/mysql"/>
+    </bean>
+
+    <bean id="wall-filter" class="com.alibaba.druid.wall.WallFilter">
+        <property name="dbType" value="mysql"/>
+        <property name="config" ref="wall-filter-config"/>
+    </bean>
+
+    <!-- -->
+    <bean id="config-filter" class="com.alibaba.druid.filter.config.ConfigFilter">
+    </bean>
+
+    <!-- 日志输出 -->
+    <bean id="log-filter" class="com.alibaba.druid.filter.logging.Log4jFilter">
+        <property name="resultSetLogEnabled" value="false"/>
+        <property name="statementExecutableSqlLogEnable" value="true"/>
+    </bean>
+
+
+    <bean id="druidDataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" abstract="true">
+        <!-- 配置初始化大小、最小、最大 -->
+        <property name="initialSize" value="1"/>
+        <property name="minIdle" value="1"/>
+        <property name="maxActive" value="20"/>
+        <!-- 配置获取连接等待超时的时间 -->
+        <property name="maxWait" value="60000"/>
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <property name="timeBetweenEvictionRunsMillis" value="60000"/>
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name="minEvictableIdleTimeMillis" value="300000"/>
+        <property name="validationQuery" value="SELECT 'x'"/>
+        <property name="testWhileIdle" value="true"/>
+        <property name="testOnBorrow" value="false"/>
+        <property name="testOnReturn" value="false"/>
+        <!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
+        <property name="poolPreparedStatements" value="false"/>
+        <property name="maxPoolPreparedStatementPerConnectionSize" value="20"/>
+        <!-- 配置监控统计拦截的filters -->
+        <property name="proxyFilters">
+            <list>
+                <ref bean="stat-filter"/>
+                <ref bean="wall-filter"/>
+                <ref bean="log-filter"/>
+                <ref bean="config-filter"/>
+            </list>
+        </property>
+    </bean>
+
+
+    <bean id="dataSource" destroy-method="close" parent="druidDataSource">
+        <!-- Druid是根据url前缀来识别DriverClass的 -->
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="connectionProperties" value="config.decrypt=true"/>
+    </bean>
+
+
+    <bean id="druid-stat-interceptor" class="com.alibaba.druid.support.spring.stat.DruidStatInterceptor">
+    </bean>
+
+    <bean id="druid-stat-pointcut" class="org.springframework.aop.support.JdkRegexpMethodPointcut" scope="prototype">
+        <property name="patterns">
+            <list>
+                <value>com.tk.mapper.*</value>
+                <value>com.tk.manage.*</value>
+            </list>
+        </property>
+    </bean>
+
+    <aop:config>
+        <aop:advisor advice-ref="druid-stat-interceptor" pointcut-ref="druid-stat-pointcut"/>
+    </aop:config>
+
+    <bean id="imageUploadService" class="com.bs.util.HttpPostUploadUtil">
+        <property name="uploadUrl" value="${image_url}" />
+        <property name="netServiceUrl" value="${net_image_url}" />
+    </bean>
+
+    <bean id="jpushClient" class="cn.jpush.api.JPushClient">
+        <constructor-arg value="${JPush_MasterSecret}"/>
+        <constructor-arg value="${JPush_AppKey}"/>
+    </bean>
+
+    <bean id="easemobService" class="com.tk.easemob.EasemobService" init-method="initEasemobUtils">
+        <property name="appKey" value="${EASEMOB_APPKEY}"/>
+        <property name="appClientId" value="${EASEMOB_APP_CLIENT_ID}"/>
+        <property name="appClientSecret" value="${EASEMOB_APP_CLIENT_SECRET}"/>
+    </bean>
+
+
+
+</beans>

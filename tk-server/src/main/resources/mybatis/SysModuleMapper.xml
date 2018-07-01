@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tk.mapper.SysModuleMapper" >
+  <cache type="org.mybatis.caches.ehcache.EhcacheCache" />
+  <resultMap id="BaseResultMap" type="com.tk.model.SysModule" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="TITLE" property="title" jdbcType="VARCHAR" />
+    <result column="INTRO" property="intro" jdbcType="VARCHAR" />
+    <result column="URL" property="url" jdbcType="VARCHAR" />
+    <result column="LEVEL" property="level" jdbcType="TINYINT" />
+    <result column="PCODE" property="pcode" jdbcType="VARCHAR" />
+    <result column="CODE" property="code" jdbcType="VARCHAR" />
+    <result column="ICO" property="ico" jdbcType="VARCHAR" />
+    <result column="FLAG" property="flag" jdbcType="TINYINT" />
+    <result column="CREATEDATE" property="createdate" jdbcType="TIMESTAMP" />
+    <result column="CREATEUSER" property="createuser" jdbcType="BIGINT" />
+    <result column="MODIFYDATE" property="modifydate" jdbcType="TIMESTAMP" />
+    <result column="MODIFYUSER" property="modifyuser" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, TITLE, INTRO, URL, LEVEL, PCODE, CODE, ICO, FLAG, CREATEDATE, CREATEUSER, MODIFYDATE, 
+    MODIFYUSER
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.tk.model.SysModuleExample">
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_module
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_module
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_module
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.tk.model.SysModuleExample" >
+    delete from sys_module
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tk.model.SysModule" >
+    insert into sys_module (ID, TITLE, INTRO, 
+      URL, LEVEL, PCODE, 
+      CODE, ICO, FLAG, CREATEDATE, 
+      CREATEUSER, MODIFYDATE, MODIFYUSER
+      )
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{intro,jdbcType=VARCHAR}, 
+      #{url,jdbcType=VARCHAR}, #{level,jdbcType=TINYINT}, #{pcode,jdbcType=VARCHAR}, 
+      #{code,jdbcType=VARCHAR}, #{ico,jdbcType=VARCHAR}, #{flag,jdbcType=TINYINT}, #{createdate,jdbcType=TIMESTAMP}, 
+      #{createuser,jdbcType=BIGINT}, #{modifydate,jdbcType=TIMESTAMP}, #{modifyuser,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.tk.model.SysModule" >
+    insert into sys_module
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="title != null" >
+        TITLE,
+      </if>
+      <if test="intro != null" >
+        INTRO,
+      </if>
+      <if test="url != null" >
+        URL,
+      </if>
+      <if test="level != null" >
+        LEVEL,
+      </if>
+      <if test="pcode != null" >
+        PCODE,
+      </if>
+      <if test="code != null" >
+        CODE,
+      </if>
+      <if test="ico != null" >
+        ICO,
+      </if>
+      <if test="flag != null" >
+        FLAG,
+      </if>
+      <if test="createdate != null" >
+        CREATEDATE,
+      </if>
+      <if test="createuser != null" >
+        CREATEUSER,
+      </if>
+      <if test="modifydate != null" >
+        MODIFYDATE,
+      </if>
+      <if test="modifyuser != null" >
+        MODIFYUSER,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="intro != null" >
+        #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=TINYINT},
+      </if>
+      <if test="pcode != null" >
+        #{pcode,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="ico != null" >
+        #{ico,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null" >
+        #{flag,jdbcType=TINYINT},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createuser != null" >
+        #{createuser,jdbcType=BIGINT},
+      </if>
+      <if test="modifydate != null" >
+        #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyuser != null" >
+        #{modifyuser,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tk.model.SysModuleExample" resultType="java.lang.Integer" >
+    select count(*) from sys_module
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sys_module
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null" >
+        TITLE = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.intro != null" >
+        INTRO = #{record.intro,jdbcType=VARCHAR},
+      </if>
+      <if test="record.url != null" >
+        URL = #{record.url,jdbcType=VARCHAR},
+      </if>
+      <if test="record.level != null" >
+        LEVEL = #{record.level,jdbcType=TINYINT},
+      </if>
+      <if test="record.pcode != null" >
+        PCODE = #{record.pcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.code != null" >
+        CODE = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ico != null" >
+        ICO = #{record.ico,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flag != null" >
+        FLAG = #{record.flag,jdbcType=TINYINT},
+      </if>
+      <if test="record.createdate != null" >
+        CREATEDATE = #{record.createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createuser != null" >
+        CREATEUSER = #{record.createuser,jdbcType=BIGINT},
+      </if>
+      <if test="record.modifydate != null" >
+        MODIFYDATE = #{record.modifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifyuser != null" >
+        MODIFYUSER = #{record.modifyuser,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sys_module
+    set ID = #{record.id,jdbcType=INTEGER},
+      TITLE = #{record.title,jdbcType=VARCHAR},
+      INTRO = #{record.intro,jdbcType=VARCHAR},
+      URL = #{record.url,jdbcType=VARCHAR},
+      LEVEL = #{record.level,jdbcType=TINYINT},
+      PCODE = #{record.pcode,jdbcType=VARCHAR},
+      CODE = #{record.code,jdbcType=VARCHAR},
+      ICO = #{record.ico,jdbcType=VARCHAR},
+      FLAG = #{record.flag,jdbcType=TINYINT},
+      CREATEDATE = #{record.createdate,jdbcType=TIMESTAMP},
+      CREATEUSER = #{record.createuser,jdbcType=BIGINT},
+      MODIFYDATE = #{record.modifydate,jdbcType=TIMESTAMP},
+      MODIFYUSER = #{record.modifyuser,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tk.model.SysModule" >
+    update sys_module
+    <set >
+      <if test="title != null" >
+        TITLE = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="intro != null" >
+        INTRO = #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        URL = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        LEVEL = #{level,jdbcType=TINYINT},
+      </if>
+      <if test="pcode != null" >
+        PCODE = #{pcode,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        CODE = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="ico != null" >
+        ICO = #{ico,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null" >
+        FLAG = #{flag,jdbcType=TINYINT},
+      </if>
+      <if test="createdate != null" >
+        CREATEDATE = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createuser != null" >
+        CREATEUSER = #{createuser,jdbcType=BIGINT},
+      </if>
+      <if test="modifydate != null" >
+        MODIFYDATE = #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyuser != null" >
+        MODIFYUSER = #{modifyuser,jdbcType=BIGINT},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tk.model.SysModule" >
+    update sys_module
+    set TITLE = #{title,jdbcType=VARCHAR},
+      INTRO = #{intro,jdbcType=VARCHAR},
+      URL = #{url,jdbcType=VARCHAR},
+      LEVEL = #{level,jdbcType=TINYINT},
+      PCODE = #{pcode,jdbcType=VARCHAR},
+      CODE = #{code,jdbcType=VARCHAR},
+      ICO = #{ico,jdbcType=VARCHAR},
+      FLAG = #{flag,jdbcType=TINYINT},
+      CREATEDATE = #{createdate,jdbcType=TIMESTAMP},
+      CREATEUSER = #{createuser,jdbcType=BIGINT},
+      MODIFYDATE = #{modifydate,jdbcType=TIMESTAMP},
+      MODIFYUSER = #{modifyuser,jdbcType=BIGINT}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

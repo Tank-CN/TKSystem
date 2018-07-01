@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tk.mapper.UserMapper" >
+  <cache type="org.mybatis.caches.ehcache.EhcacheCache" />
+  <resultMap id="BaseResultMap" type="com.tk.model.User" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="USERNAME" property="username" jdbcType="VARCHAR" />
+    <result column="PASSWORD" property="password" jdbcType="VARCHAR" />
+    <result column="TOKEN" property="token" jdbcType="VARCHAR" />
+    <result column="MOBILE" property="mobile" jdbcType="VARCHAR" />
+    <result column="NICKNAME" property="nickname" jdbcType="VARCHAR" />
+    <result column="SEXCODE" property="sexcode" jdbcType="TINYINT" />
+    <result column="BIRTHDATE" property="birthdate" jdbcType="TIMESTAMP" />
+    <result column="HEADER" property="header" jdbcType="VARCHAR" />
+    <result column="VIP" property="vip" jdbcType="TINYINT" />
+    <result column="VIPTIME" property="viptime" jdbcType="TIMESTAMP" />
+    <result column="INFO" property="info" jdbcType="VARCHAR" />
+    <result column="FLAG" property="flag" jdbcType="TINYINT" />
+    <result column="REGTYPE" property="regtype" jdbcType="SMALLINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, USERNAME, PASSWORD, TOKEN, MOBILE, NICKNAME, SEXCODE, BIRTHDATE, HEADER, VIP, 
+    VIPTIME, INFO, FLAG, REGTYPE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.tk.model.UserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from user
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.tk.model.UserExample" >
+    delete from user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tk.model.User" >
+    insert into user (ID, USERNAME, PASSWORD, 
+      TOKEN, MOBILE, NICKNAME, 
+      SEXCODE, BIRTHDATE, HEADER, 
+      VIP, VIPTIME, INFO, 
+      FLAG, REGTYPE)
+    values (#{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{token,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
+      #{sexcode,jdbcType=TINYINT}, #{birthdate,jdbcType=TIMESTAMP}, #{header,jdbcType=VARCHAR}, 
+      #{vip,jdbcType=TINYINT}, #{viptime,jdbcType=TIMESTAMP}, #{info,jdbcType=VARCHAR}, 
+      #{flag,jdbcType=TINYINT}, #{regtype,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tk.model.User" >
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="username != null" >
+        USERNAME,
+      </if>
+      <if test="password != null" >
+        PASSWORD,
+      </if>
+      <if test="token != null" >
+        TOKEN,
+      </if>
+      <if test="mobile != null" >
+        MOBILE,
+      </if>
+      <if test="nickname != null" >
+        NICKNAME,
+      </if>
+      <if test="sexcode != null" >
+        SEXCODE,
+      </if>
+      <if test="birthdate != null" >
+        BIRTHDATE,
+      </if>
+      <if test="header != null" >
+        HEADER,
+      </if>
+      <if test="vip != null" >
+        VIP,
+      </if>
+      <if test="viptime != null" >
+        VIPTIME,
+      </if>
+      <if test="info != null" >
+        INFO,
+      </if>
+      <if test="flag != null" >
+        FLAG,
+      </if>
+      <if test="regtype != null" >
+        REGTYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null" >
+        #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="sexcode != null" >
+        #{sexcode,jdbcType=TINYINT},
+      </if>
+      <if test="birthdate != null" >
+        #{birthdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="header != null" >
+        #{header,jdbcType=VARCHAR},
+      </if>
+      <if test="vip != null" >
+        #{vip,jdbcType=TINYINT},
+      </if>
+      <if test="viptime != null" >
+        #{viptime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="info != null" >
+        #{info,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null" >
+        #{flag,jdbcType=TINYINT},
+      </if>
+      <if test="regtype != null" >
+        #{regtype,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tk.model.UserExample" resultType="java.lang.Integer" >
+    select count(*) from user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update user
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.username != null" >
+        USERNAME = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null" >
+        PASSWORD = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.token != null" >
+        TOKEN = #{record.token,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobile != null" >
+        MOBILE = #{record.mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nickname != null" >
+        NICKNAME = #{record.nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sexcode != null" >
+        SEXCODE = #{record.sexcode,jdbcType=TINYINT},
+      </if>
+      <if test="record.birthdate != null" >
+        BIRTHDATE = #{record.birthdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.header != null" >
+        HEADER = #{record.header,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vip != null" >
+        VIP = #{record.vip,jdbcType=TINYINT},
+      </if>
+      <if test="record.viptime != null" >
+        VIPTIME = #{record.viptime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.info != null" >
+        INFO = #{record.info,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flag != null" >
+        FLAG = #{record.flag,jdbcType=TINYINT},
+      </if>
+      <if test="record.regtype != null" >
+        REGTYPE = #{record.regtype,jdbcType=SMALLINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update user
+    set ID = #{record.id,jdbcType=BIGINT},
+      USERNAME = #{record.username,jdbcType=VARCHAR},
+      PASSWORD = #{record.password,jdbcType=VARCHAR},
+      TOKEN = #{record.token,jdbcType=VARCHAR},
+      MOBILE = #{record.mobile,jdbcType=VARCHAR},
+      NICKNAME = #{record.nickname,jdbcType=VARCHAR},
+      SEXCODE = #{record.sexcode,jdbcType=TINYINT},
+      BIRTHDATE = #{record.birthdate,jdbcType=TIMESTAMP},
+      HEADER = #{record.header,jdbcType=VARCHAR},
+      VIP = #{record.vip,jdbcType=TINYINT},
+      VIPTIME = #{record.viptime,jdbcType=TIMESTAMP},
+      INFO = #{record.info,jdbcType=VARCHAR},
+      FLAG = #{record.flag,jdbcType=TINYINT},
+      REGTYPE = #{record.regtype,jdbcType=SMALLINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tk.model.User" >
+    update user
+    <set >
+      <if test="username != null" >
+        USERNAME = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        PASSWORD = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null" >
+        TOKEN = #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        MOBILE = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        NICKNAME = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="sexcode != null" >
+        SEXCODE = #{sexcode,jdbcType=TINYINT},
+      </if>
+      <if test="birthdate != null" >
+        BIRTHDATE = #{birthdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="header != null" >
+        HEADER = #{header,jdbcType=VARCHAR},
+      </if>
+      <if test="vip != null" >
+        VIP = #{vip,jdbcType=TINYINT},
+      </if>
+      <if test="viptime != null" >
+        VIPTIME = #{viptime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="info != null" >
+        INFO = #{info,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null" >
+        FLAG = #{flag,jdbcType=TINYINT},
+      </if>
+      <if test="regtype != null" >
+        REGTYPE = #{regtype,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tk.model.User" >
+    update user
+    set USERNAME = #{username,jdbcType=VARCHAR},
+      PASSWORD = #{password,jdbcType=VARCHAR},
+      TOKEN = #{token,jdbcType=VARCHAR},
+      MOBILE = #{mobile,jdbcType=VARCHAR},
+      NICKNAME = #{nickname,jdbcType=VARCHAR},
+      SEXCODE = #{sexcode,jdbcType=TINYINT},
+      BIRTHDATE = #{birthdate,jdbcType=TIMESTAMP},
+      HEADER = #{header,jdbcType=VARCHAR},
+      VIP = #{vip,jdbcType=TINYINT},
+      VIPTIME = #{viptime,jdbcType=TIMESTAMP},
+      INFO = #{info,jdbcType=VARCHAR},
+      FLAG = #{flag,jdbcType=TINYINT},
+      REGTYPE = #{regtype,jdbcType=SMALLINT}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

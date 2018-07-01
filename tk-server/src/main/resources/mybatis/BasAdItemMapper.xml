@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tk.mapper.BasAdItemMapper" >
+  <cache type="org.mybatis.caches.ehcache.EhcacheCache" />
+  <resultMap id="BaseResultMap" type="com.tk.model.BasAdItem" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="BID" property="bid" jdbcType="BIGINT" />
+    <result column="TITLE" property="title" jdbcType="VARCHAR" />
+    <result column="TAG" property="tag" jdbcType="VARCHAR" />
+    <result column="DES" property="des" jdbcType="VARCHAR" />
+    <result column="PICURL" property="picurl" jdbcType="VARCHAR" />
+    <result column="WEBURL" property="weburl" jdbcType="VARCHAR" />
+    <result column="FLAG" property="flag" jdbcType="TINYINT" />
+    <result column="CREATEDATE" property="createdate" jdbcType="TIMESTAMP" />
+    <result column="CREATEUSER" property="createuser" jdbcType="BIGINT" />
+    <result column="LASTMODIFYUSER" property="lastmodifyuser" jdbcType="BIGINT" />
+    <result column="LASTMODIFYDATE" property="lastmodifydate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.tk.model.BasAdItem" extends="BaseResultMap" >
+    <result column="CONTENT" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, BID, TITLE, TAG, DES, PICURL, WEBURL, FLAG, CREATEDATE, CREATEUSER, LASTMODIFYUSER, 
+    LASTMODIFYDATE
+  </sql>
+  <sql id="Blob_Column_List" >
+    CONTENT
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.tk.model.BasAdItemExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from bas_ad_item
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.tk.model.BasAdItemExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bas_ad_item
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from bas_ad_item
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from bas_ad_item
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.tk.model.BasAdItemExample" >
+    delete from bas_ad_item
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tk.model.BasAdItem" >
+    insert into bas_ad_item (ID, BID, TITLE, 
+      TAG, DES, PICURL, WEBURL, 
+      FLAG, CREATEDATE, CREATEUSER, 
+      LASTMODIFYUSER, LASTMODIFYDATE, CONTENT
+      )
+    values (#{id,jdbcType=BIGINT}, #{bid,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, 
+      #{tag,jdbcType=VARCHAR}, #{des,jdbcType=VARCHAR}, #{picurl,jdbcType=VARCHAR}, #{weburl,jdbcType=VARCHAR}, 
+      #{flag,jdbcType=TINYINT}, #{createdate,jdbcType=TIMESTAMP}, #{createuser,jdbcType=BIGINT}, 
+      #{lastmodifyuser,jdbcType=BIGINT}, #{lastmodifydate,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.tk.model.BasAdItem" >
+    insert into bas_ad_item
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="bid != null" >
+        BID,
+      </if>
+      <if test="title != null" >
+        TITLE,
+      </if>
+      <if test="tag != null" >
+        TAG,
+      </if>
+      <if test="des != null" >
+        DES,
+      </if>
+      <if test="picurl != null" >
+        PICURL,
+      </if>
+      <if test="weburl != null" >
+        WEBURL,
+      </if>
+      <if test="flag != null" >
+        FLAG,
+      </if>
+      <if test="createdate != null" >
+        CREATEDATE,
+      </if>
+      <if test="createuser != null" >
+        CREATEUSER,
+      </if>
+      <if test="lastmodifyuser != null" >
+        LASTMODIFYUSER,
+      </if>
+      <if test="lastmodifydate != null" >
+        LASTMODIFYDATE,
+      </if>
+      <if test="content != null" >
+        CONTENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="bid != null" >
+        #{bid,jdbcType=BIGINT},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="tag != null" >
+        #{tag,jdbcType=VARCHAR},
+      </if>
+      <if test="des != null" >
+        #{des,jdbcType=VARCHAR},
+      </if>
+      <if test="picurl != null" >
+        #{picurl,jdbcType=VARCHAR},
+      </if>
+      <if test="weburl != null" >
+        #{weburl,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null" >
+        #{flag,jdbcType=TINYINT},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createuser != null" >
+        #{createuser,jdbcType=BIGINT},
+      </if>
+      <if test="lastmodifyuser != null" >
+        #{lastmodifyuser,jdbcType=BIGINT},
+      </if>
+      <if test="lastmodifydate != null" >
+        #{lastmodifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tk.model.BasAdItemExample" resultType="java.lang.Integer" >
+    select count(*) from bas_ad_item
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bas_ad_item
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.bid != null" >
+        BID = #{record.bid,jdbcType=BIGINT},
+      </if>
+      <if test="record.title != null" >
+        TITLE = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tag != null" >
+        TAG = #{record.tag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.des != null" >
+        DES = #{record.des,jdbcType=VARCHAR},
+      </if>
+      <if test="record.picurl != null" >
+        PICURL = #{record.picurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.weburl != null" >
+        WEBURL = #{record.weburl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flag != null" >
+        FLAG = #{record.flag,jdbcType=TINYINT},
+      </if>
+      <if test="record.createdate != null" >
+        CREATEDATE = #{record.createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createuser != null" >
+        CREATEUSER = #{record.createuser,jdbcType=BIGINT},
+      </if>
+      <if test="record.lastmodifyuser != null" >
+        LASTMODIFYUSER = #{record.lastmodifyuser,jdbcType=BIGINT},
+      </if>
+      <if test="record.lastmodifydate != null" >
+        LASTMODIFYDATE = #{record.lastmodifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.content != null" >
+        CONTENT = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update bas_ad_item
+    set ID = #{record.id,jdbcType=BIGINT},
+      BID = #{record.bid,jdbcType=BIGINT},
+      TITLE = #{record.title,jdbcType=VARCHAR},
+      TAG = #{record.tag,jdbcType=VARCHAR},
+      DES = #{record.des,jdbcType=VARCHAR},
+      PICURL = #{record.picurl,jdbcType=VARCHAR},
+      WEBURL = #{record.weburl,jdbcType=VARCHAR},
+      FLAG = #{record.flag,jdbcType=TINYINT},
+      CREATEDATE = #{record.createdate,jdbcType=TIMESTAMP},
+      CREATEUSER = #{record.createuser,jdbcType=BIGINT},
+      LASTMODIFYUSER = #{record.lastmodifyuser,jdbcType=BIGINT},
+      LASTMODIFYDATE = #{record.lastmodifydate,jdbcType=TIMESTAMP},
+      CONTENT = #{record.content,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bas_ad_item
+    set ID = #{record.id,jdbcType=BIGINT},
+      BID = #{record.bid,jdbcType=BIGINT},
+      TITLE = #{record.title,jdbcType=VARCHAR},
+      TAG = #{record.tag,jdbcType=VARCHAR},
+      DES = #{record.des,jdbcType=VARCHAR},
+      PICURL = #{record.picurl,jdbcType=VARCHAR},
+      WEBURL = #{record.weburl,jdbcType=VARCHAR},
+      FLAG = #{record.flag,jdbcType=TINYINT},
+      CREATEDATE = #{record.createdate,jdbcType=TIMESTAMP},
+      CREATEUSER = #{record.createuser,jdbcType=BIGINT},
+      LASTMODIFYUSER = #{record.lastmodifyuser,jdbcType=BIGINT},
+      LASTMODIFYDATE = #{record.lastmodifydate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tk.model.BasAdItem" >
+    update bas_ad_item
+    <set >
+      <if test="bid != null" >
+        BID = #{bid,jdbcType=BIGINT},
+      </if>
+      <if test="title != null" >
+        TITLE = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="tag != null" >
+        TAG = #{tag,jdbcType=VARCHAR},
+      </if>
+      <if test="des != null" >
+        DES = #{des,jdbcType=VARCHAR},
+      </if>
+      <if test="picurl != null" >
+        PICURL = #{picurl,jdbcType=VARCHAR},
+      </if>
+      <if test="weburl != null" >
+        WEBURL = #{weburl,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null" >
+        FLAG = #{flag,jdbcType=TINYINT},
+      </if>
+      <if test="createdate != null" >
+        CREATEDATE = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createuser != null" >
+        CREATEUSER = #{createuser,jdbcType=BIGINT},
+      </if>
+      <if test="lastmodifyuser != null" >
+        LASTMODIFYUSER = #{lastmodifyuser,jdbcType=BIGINT},
+      </if>
+      <if test="lastmodifydate != null" >
+        LASTMODIFYDATE = #{lastmodifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        CONTENT = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.tk.model.BasAdItem" >
+    update bas_ad_item
+    set BID = #{bid,jdbcType=BIGINT},
+      TITLE = #{title,jdbcType=VARCHAR},
+      TAG = #{tag,jdbcType=VARCHAR},
+      DES = #{des,jdbcType=VARCHAR},
+      PICURL = #{picurl,jdbcType=VARCHAR},
+      WEBURL = #{weburl,jdbcType=VARCHAR},
+      FLAG = #{flag,jdbcType=TINYINT},
+      CREATEDATE = #{createdate,jdbcType=TIMESTAMP},
+      CREATEUSER = #{createuser,jdbcType=BIGINT},
+      LASTMODIFYUSER = #{lastmodifyuser,jdbcType=BIGINT},
+      LASTMODIFYDATE = #{lastmodifydate,jdbcType=TIMESTAMP},
+      CONTENT = #{content,jdbcType=LONGVARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tk.model.BasAdItem" >
+    update bas_ad_item
+    set BID = #{bid,jdbcType=BIGINT},
+      TITLE = #{title,jdbcType=VARCHAR},
+      TAG = #{tag,jdbcType=VARCHAR},
+      DES = #{des,jdbcType=VARCHAR},
+      PICURL = #{picurl,jdbcType=VARCHAR},
+      WEBURL = #{weburl,jdbcType=VARCHAR},
+      FLAG = #{flag,jdbcType=TINYINT},
+      CREATEDATE = #{createdate,jdbcType=TIMESTAMP},
+      CREATEUSER = #{createuser,jdbcType=BIGINT},
+      LASTMODIFYUSER = #{lastmodifyuser,jdbcType=BIGINT},
+      LASTMODIFYDATE = #{lastmodifydate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

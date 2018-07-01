@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tk.mapper.ActivityMapper" >
+  <cache type="org.mybatis.caches.ehcache.EhcacheCache" />
+  <resultMap id="BaseResultMap" type="com.tk.model.Activity" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="UID" property="uid" jdbcType="BIGINT" />
+    <result column="BID" property="bid" jdbcType="BIGINT" />
+    <result column="BNAME" property="bname" jdbcType="VARCHAR" />
+    <result column="TITLE" property="title" jdbcType="VARCHAR" />
+    <result column="DES" property="des" jdbcType="VARCHAR" />
+    <result column="CONTENT" property="content" jdbcType="VARCHAR" />
+    <result column="IMGURL" property="imgurl" jdbcType="VARCHAR" />
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+    <result column="LONGITUDE" property="longitude" jdbcType="DECIMAL" />
+    <result column="LATITUDE" property="latitude" jdbcType="DECIMAL" />
+    <result column="STIME" property="stime" jdbcType="TIMESTAMP" />
+    <result column="ETIME" property="etime" jdbcType="TIMESTAMP" />
+    <result column="LINKMAN" property="linkman" jdbcType="VARCHAR" />
+    <result column="LINKPHONE" property="linkphone" jdbcType="VARCHAR" />
+    <result column="FLAG" property="flag" jdbcType="TINYINT" />
+    <result column="CREATEDATE" property="createdate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, UID, BID, BNAME, TITLE, DES, CONTENT, IMGURL, ADDRESS, LONGITUDE, LATITUDE, STIME, 
+    ETIME, LINKMAN, LINKPHONE, FLAG, CREATEDATE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.tk.model.ActivityExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from activity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from activity
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from activity
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.tk.model.ActivityExample" >
+    delete from activity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tk.model.Activity" >
+    insert into activity (ID, UID, BID, BNAME, 
+      TITLE, DES, CONTENT, 
+      IMGURL, ADDRESS, LONGITUDE, 
+      LATITUDE, STIME, ETIME, 
+      LINKMAN, LINKPHONE, FLAG, 
+      CREATEDATE)
+    values (#{id,jdbcType=BIGINT}, #{uid,jdbcType=BIGINT}, #{bid,jdbcType=BIGINT}, #{bname,jdbcType=VARCHAR}, 
+      #{title,jdbcType=VARCHAR}, #{des,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{imgurl,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{longitude,jdbcType=DECIMAL}, 
+      #{latitude,jdbcType=DECIMAL}, #{stime,jdbcType=TIMESTAMP}, #{etime,jdbcType=TIMESTAMP}, 
+      #{linkman,jdbcType=VARCHAR}, #{linkphone,jdbcType=VARCHAR}, #{flag,jdbcType=TINYINT}, 
+      #{createdate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tk.model.Activity" >
+    insert into activity
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="uid != null" >
+        UID,
+      </if>
+      <if test="bid != null" >
+        BID,
+      </if>
+      <if test="bname != null" >
+        BNAME,
+      </if>
+      <if test="title != null" >
+        TITLE,
+      </if>
+      <if test="des != null" >
+        DES,
+      </if>
+      <if test="content != null" >
+        CONTENT,
+      </if>
+      <if test="imgurl != null" >
+        IMGURL,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+      <if test="longitude != null" >
+        LONGITUDE,
+      </if>
+      <if test="latitude != null" >
+        LATITUDE,
+      </if>
+      <if test="stime != null" >
+        STIME,
+      </if>
+      <if test="etime != null" >
+        ETIME,
+      </if>
+      <if test="linkman != null" >
+        LINKMAN,
+      </if>
+      <if test="linkphone != null" >
+        LINKPHONE,
+      </if>
+      <if test="flag != null" >
+        FLAG,
+      </if>
+      <if test="createdate != null" >
+        CREATEDATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="bid != null" >
+        #{bid,jdbcType=BIGINT},
+      </if>
+      <if test="bname != null" >
+        #{bname,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="des != null" >
+        #{des,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="imgurl != null" >
+        #{imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null" >
+        #{longitude,jdbcType=DECIMAL},
+      </if>
+      <if test="latitude != null" >
+        #{latitude,jdbcType=DECIMAL},
+      </if>
+      <if test="stime != null" >
+        #{stime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="etime != null" >
+        #{etime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="linkman != null" >
+        #{linkman,jdbcType=VARCHAR},
+      </if>
+      <if test="linkphone != null" >
+        #{linkphone,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null" >
+        #{flag,jdbcType=TINYINT},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tk.model.ActivityExample" resultType="java.lang.Integer" >
+    select count(*) from activity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update activity
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.uid != null" >
+        UID = #{record.uid,jdbcType=BIGINT},
+      </if>
+      <if test="record.bid != null" >
+        BID = #{record.bid,jdbcType=BIGINT},
+      </if>
+      <if test="record.bname != null" >
+        BNAME = #{record.bname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null" >
+        TITLE = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.des != null" >
+        DES = #{record.des,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null" >
+        CONTENT = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imgurl != null" >
+        IMGURL = #{record.imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        ADDRESS = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.longitude != null" >
+        LONGITUDE = #{record.longitude,jdbcType=DECIMAL},
+      </if>
+      <if test="record.latitude != null" >
+        LATITUDE = #{record.latitude,jdbcType=DECIMAL},
+      </if>
+      <if test="record.stime != null" >
+        STIME = #{record.stime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.etime != null" >
+        ETIME = #{record.etime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.linkman != null" >
+        LINKMAN = #{record.linkman,jdbcType=VARCHAR},
+      </if>
+      <if test="record.linkphone != null" >
+        LINKPHONE = #{record.linkphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flag != null" >
+        FLAG = #{record.flag,jdbcType=TINYINT},
+      </if>
+      <if test="record.createdate != null" >
+        CREATEDATE = #{record.createdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update activity
+    set ID = #{record.id,jdbcType=BIGINT},
+      UID = #{record.uid,jdbcType=BIGINT},
+      BID = #{record.bid,jdbcType=BIGINT},
+      BNAME = #{record.bname,jdbcType=VARCHAR},
+      TITLE = #{record.title,jdbcType=VARCHAR},
+      DES = #{record.des,jdbcType=VARCHAR},
+      CONTENT = #{record.content,jdbcType=VARCHAR},
+      IMGURL = #{record.imgurl,jdbcType=VARCHAR},
+      ADDRESS = #{record.address,jdbcType=VARCHAR},
+      LONGITUDE = #{record.longitude,jdbcType=DECIMAL},
+      LATITUDE = #{record.latitude,jdbcType=DECIMAL},
+      STIME = #{record.stime,jdbcType=TIMESTAMP},
+      ETIME = #{record.etime,jdbcType=TIMESTAMP},
+      LINKMAN = #{record.linkman,jdbcType=VARCHAR},
+      LINKPHONE = #{record.linkphone,jdbcType=VARCHAR},
+      FLAG = #{record.flag,jdbcType=TINYINT},
+      CREATEDATE = #{record.createdate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tk.model.Activity" >
+    update activity
+    <set >
+      <if test="uid != null" >
+        UID = #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="bid != null" >
+        BID = #{bid,jdbcType=BIGINT},
+      </if>
+      <if test="bname != null" >
+        BNAME = #{bname,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        TITLE = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="des != null" >
+        DES = #{des,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        CONTENT = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="imgurl != null" >
+        IMGURL = #{imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null" >
+        LONGITUDE = #{longitude,jdbcType=DECIMAL},
+      </if>
+      <if test="latitude != null" >
+        LATITUDE = #{latitude,jdbcType=DECIMAL},
+      </if>
+      <if test="stime != null" >
+        STIME = #{stime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="etime != null" >
+        ETIME = #{etime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="linkman != null" >
+        LINKMAN = #{linkman,jdbcType=VARCHAR},
+      </if>
+      <if test="linkphone != null" >
+        LINKPHONE = #{linkphone,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null" >
+        FLAG = #{flag,jdbcType=TINYINT},
+      </if>
+      <if test="createdate != null" >
+        CREATEDATE = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tk.model.Activity" >
+    update activity
+    set UID = #{uid,jdbcType=BIGINT},
+      BID = #{bid,jdbcType=BIGINT},
+      BNAME = #{bname,jdbcType=VARCHAR},
+      TITLE = #{title,jdbcType=VARCHAR},
+      DES = #{des,jdbcType=VARCHAR},
+      CONTENT = #{content,jdbcType=VARCHAR},
+      IMGURL = #{imgurl,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      LONGITUDE = #{longitude,jdbcType=DECIMAL},
+      LATITUDE = #{latitude,jdbcType=DECIMAL},
+      STIME = #{stime,jdbcType=TIMESTAMP},
+      ETIME = #{etime,jdbcType=TIMESTAMP},
+      LINKMAN = #{linkman,jdbcType=VARCHAR},
+      LINKPHONE = #{linkphone,jdbcType=VARCHAR},
+      FLAG = #{flag,jdbcType=TINYINT},
+      CREATEDATE = #{createdate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

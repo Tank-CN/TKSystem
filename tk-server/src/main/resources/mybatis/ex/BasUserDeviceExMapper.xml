@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tk.mapper.ex.BasUserDeviceExMapper">
+  <cache-ref namespace="com.tk.mapper.BasUserDeviceMapper" />
+  <insert id="insertBackId" parameterType="com.tk.model.BasUserDevice" keyProperty="id" useGeneratedKeys="true">
+    insert into bas_user_device
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="uid != null" >
+        UID,
+      </if>
+      <if test="apptype != null" >
+        APPTYPE,
+      </if>
+      <if test="deviceId != null" >
+        DEVICE_ID,
+      </if>
+      <if test="uniquecode != null" >
+        UNIQUECODE,
+      </if>
+      <if test="uniquecode1 != null" >
+        UNIQUECODE1,
+      </if>
+      <if test="deviceName != null" >
+        DEVICE_NAME,
+      </if>
+      <if test="deviceSysName != null" >
+        DEVICE_SYS_NAME,
+      </if>
+      <if test="deviceSysVersion != null" >
+        DEVICE_SYS_VERSION,
+      </if>
+      <if test="phoneModel != null" >
+        PHONE_MODEL,
+      </if>
+      <if test="lang != null" >
+        LANG,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="gmtModified != null" >
+        GMT_MODIFIED,
+      </if>
+      <if test="modifydate != null" >
+        MODIFYDATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="apptype != null" >
+        #{apptype,jdbcType=TINYINT},
+      </if>
+      <if test="deviceId != null" >
+        #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="uniquecode != null" >
+        #{uniquecode,jdbcType=VARCHAR},
+      </if>
+      <if test="uniquecode1 != null" >
+        #{uniquecode1,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceName != null" >
+        #{deviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceSysName != null" >
+        #{deviceSysName,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceSysVersion != null" >
+        #{deviceSysVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneModel != null" >
+        #{phoneModel,jdbcType=VARCHAR},
+      </if>
+      <if test="lang != null" >
+        #{lang,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="gmtModified != null" >
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifydate != null" >
+        #{modifydate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+</mapper>

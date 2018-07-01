@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tk.mapper.ex.UserExMapper">
+	<cache-ref namespace="com.tk.mapper.UserMapper" />
+	<insert id="insertBackId" parameterType="com.tk.model.User"
+		keyProperty="id" useGeneratedKeys="true">
+		insert into user
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="id != null" >
+				ID,
+			</if>
+			<if test="username != null" >
+				USERNAME,
+			</if>
+			<if test="password != null" >
+				PASSWORD,
+			</if>
+			<if test="token != null" >
+				TOKEN,
+			</if>
+			<if test="mobile != null" >
+				MOBILE,
+			</if>
+			<if test="nickname != null" >
+				NICKNAME,
+			</if>
+			<if test="sexcode != null" >
+				SEXCODE,
+			</if>
+			<if test="birthdate != null" >
+				BIRTHDATE,
+			</if>
+			<if test="header != null" >
+				HEADER,
+			</if>
+			<if test="vip != null" >
+				VIP,
+			</if>
+			<if test="viptime != null" >
+				VIPTIME,
+			</if>
+			<if test="info != null" >
+				INFO,
+			</if>
+			<if test="flag != null" >
+				FLAG,
+			</if>
+			<if test="regtype != null" >
+				REGTYPE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="id != null" >
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="username != null" >
+				#{username,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null" >
+				#{password,jdbcType=VARCHAR},
+			</if>
+			<if test="token != null" >
+				#{token,jdbcType=VARCHAR},
+			</if>
+			<if test="mobile != null" >
+				#{mobile,jdbcType=VARCHAR},
+			</if>
+			<if test="nickname != null" >
+				#{nickname,jdbcType=VARCHAR},
+			</if>
+			<if test="sexcode != null" >
+				#{sexcode,jdbcType=TINYINT},
+			</if>
+			<if test="birthdate != null" >
+				#{birthdate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="header != null" >
+				#{header,jdbcType=VARCHAR},
+			</if>
+			<if test="vip != null" >
+				#{vip,jdbcType=TINYINT},
+			</if>
+			<if test="viptime != null" >
+				#{viptime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="info != null" >
+				#{info,jdbcType=VARCHAR},
+			</if>
+			<if test="flag != null" >
+				#{flag,jdbcType=TINYINT},
+			</if>
+			<if test="regtype != null" >
+				#{regtype,jdbcType=SMALLINT},
+			</if>
+		</trim>
+	</insert>
+</mapper>

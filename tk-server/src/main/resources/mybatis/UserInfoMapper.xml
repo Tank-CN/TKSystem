@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tk.mapper.UserInfoMapper" >
+  <cache type="org.mybatis.caches.ehcache.EhcacheCache" />
+  <resultMap id="BaseResultMap" type="com.tk.model.UserInfo" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="UID" property="uid" jdbcType="BIGINT" />
+    <result column="REGIP" property="regip" jdbcType="VARCHAR" />
+    <result column="REGDATE" property="regdate" jdbcType="TIMESTAMP" />
+    <result column="LASTLOGDATE" property="lastlogdate" jdbcType="TIMESTAMP" />
+    <result column="LASTLOGIP" property="lastlogip" jdbcType="VARCHAR" />
+    <result column="OPENID" property="openid" jdbcType="VARCHAR" />
+    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+    <result column="IDCARD" property="idcard" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, UID, REGIP, REGDATE, LASTLOGDATE, LASTLOGIP, OPENID, EMAIL, IDCARD
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.tk.model.UserInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_info
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from user_info
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.tk.model.UserInfoExample" >
+    delete from user_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tk.model.UserInfo" >
+    insert into user_info (ID, UID, REGIP, 
+      REGDATE, LASTLOGDATE, LASTLOGIP, 
+      OPENID, EMAIL, IDCARD
+      )
+    values (#{id,jdbcType=BIGINT}, #{uid,jdbcType=BIGINT}, #{regip,jdbcType=VARCHAR}, 
+      #{regdate,jdbcType=TIMESTAMP}, #{lastlogdate,jdbcType=TIMESTAMP}, #{lastlogip,jdbcType=VARCHAR}, 
+      #{openid,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{idcard,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.tk.model.UserInfo" >
+    insert into user_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="uid != null" >
+        UID,
+      </if>
+      <if test="regip != null" >
+        REGIP,
+      </if>
+      <if test="regdate != null" >
+        REGDATE,
+      </if>
+      <if test="lastlogdate != null" >
+        LASTLOGDATE,
+      </if>
+      <if test="lastlogip != null" >
+        LASTLOGIP,
+      </if>
+      <if test="openid != null" >
+        OPENID,
+      </if>
+      <if test="email != null" >
+        EMAIL,
+      </if>
+      <if test="idcard != null" >
+        IDCARD,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="regip != null" >
+        #{regip,jdbcType=VARCHAR},
+      </if>
+      <if test="regdate != null" >
+        #{regdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastlogdate != null" >
+        #{lastlogdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastlogip != null" >
+        #{lastlogip,jdbcType=VARCHAR},
+      </if>
+      <if test="openid != null" >
+        #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null" >
+        #{idcard,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tk.model.UserInfoExample" resultType="java.lang.Integer" >
+    select count(*) from user_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update user_info
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.uid != null" >
+        UID = #{record.uid,jdbcType=BIGINT},
+      </if>
+      <if test="record.regip != null" >
+        REGIP = #{record.regip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.regdate != null" >
+        REGDATE = #{record.regdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastlogdate != null" >
+        LASTLOGDATE = #{record.lastlogdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastlogip != null" >
+        LASTLOGIP = #{record.lastlogip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.openid != null" >
+        OPENID = #{record.openid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        EMAIL = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idcard != null" >
+        IDCARD = #{record.idcard,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update user_info
+    set ID = #{record.id,jdbcType=BIGINT},
+      UID = #{record.uid,jdbcType=BIGINT},
+      REGIP = #{record.regip,jdbcType=VARCHAR},
+      REGDATE = #{record.regdate,jdbcType=TIMESTAMP},
+      LASTLOGDATE = #{record.lastlogdate,jdbcType=TIMESTAMP},
+      LASTLOGIP = #{record.lastlogip,jdbcType=VARCHAR},
+      OPENID = #{record.openid,jdbcType=VARCHAR},
+      EMAIL = #{record.email,jdbcType=VARCHAR},
+      IDCARD = #{record.idcard,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tk.model.UserInfo" >
+    update user_info
+    <set >
+      <if test="uid != null" >
+        UID = #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="regip != null" >
+        REGIP = #{regip,jdbcType=VARCHAR},
+      </if>
+      <if test="regdate != null" >
+        REGDATE = #{regdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastlogdate != null" >
+        LASTLOGDATE = #{lastlogdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastlogip != null" >
+        LASTLOGIP = #{lastlogip,jdbcType=VARCHAR},
+      </if>
+      <if test="openid != null" >
+        OPENID = #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null" >
+        IDCARD = #{idcard,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tk.model.UserInfo" >
+    update user_info
+    set UID = #{uid,jdbcType=BIGINT},
+      REGIP = #{regip,jdbcType=VARCHAR},
+      REGDATE = #{regdate,jdbcType=TIMESTAMP},
+      LASTLOGDATE = #{lastlogdate,jdbcType=TIMESTAMP},
+      LASTLOGIP = #{lastlogip,jdbcType=VARCHAR},
+      OPENID = #{openid,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      IDCARD = #{idcard,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

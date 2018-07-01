@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tk.mapper.ActivitySignupMapper" >
+  <cache type="org.mybatis.caches.ehcache.EhcacheCache" />
+  <resultMap id="BaseResultMap" type="com.tk.model.ActivitySignup" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="AID" property="aid" jdbcType="BIGINT" />
+    <result column="ATITLE" property="atitle" jdbcType="VARCHAR" />
+    <result column="UID" property="uid" jdbcType="BIGINT" />
+    <result column="UNAME" property="uname" jdbcType="VARCHAR" />
+    <result column="LINKMAN" property="linkman" jdbcType="VARCHAR" />
+    <result column="MOBILE" property="mobile" jdbcType="VARCHAR" />
+    <result column="CREATEDATE" property="createdate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, AID, ATITLE, UID, UNAME, LINKMAN, MOBILE, CREATEDATE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.tk.model.ActivitySignupExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from activity_signup
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from activity_signup
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from activity_signup
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.tk.model.ActivitySignupExample" >
+    delete from activity_signup
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tk.model.ActivitySignup" >
+    insert into activity_signup (ID, AID, ATITLE, 
+      UID, UNAME, LINKMAN, 
+      MOBILE, CREATEDATE)
+    values (#{id,jdbcType=BIGINT}, #{aid,jdbcType=BIGINT}, #{atitle,jdbcType=VARCHAR}, 
+      #{uid,jdbcType=BIGINT}, #{uname,jdbcType=VARCHAR}, #{linkman,jdbcType=VARCHAR}, 
+      #{mobile,jdbcType=VARCHAR}, #{createdate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tk.model.ActivitySignup" >
+    insert into activity_signup
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="aid != null" >
+        AID,
+      </if>
+      <if test="atitle != null" >
+        ATITLE,
+      </if>
+      <if test="uid != null" >
+        UID,
+      </if>
+      <if test="uname != null" >
+        UNAME,
+      </if>
+      <if test="linkman != null" >
+        LINKMAN,
+      </if>
+      <if test="mobile != null" >
+        MOBILE,
+      </if>
+      <if test="createdate != null" >
+        CREATEDATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="aid != null" >
+        #{aid,jdbcType=BIGINT},
+      </if>
+      <if test="atitle != null" >
+        #{atitle,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="uname != null" >
+        #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="linkman != null" >
+        #{linkman,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tk.model.ActivitySignupExample" resultType="java.lang.Integer" >
+    select count(*) from activity_signup
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update activity_signup
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.aid != null" >
+        AID = #{record.aid,jdbcType=BIGINT},
+      </if>
+      <if test="record.atitle != null" >
+        ATITLE = #{record.atitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uid != null" >
+        UID = #{record.uid,jdbcType=BIGINT},
+      </if>
+      <if test="record.uname != null" >
+        UNAME = #{record.uname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.linkman != null" >
+        LINKMAN = #{record.linkman,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobile != null" >
+        MOBILE = #{record.mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdate != null" >
+        CREATEDATE = #{record.createdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update activity_signup
+    set ID = #{record.id,jdbcType=BIGINT},
+      AID = #{record.aid,jdbcType=BIGINT},
+      ATITLE = #{record.atitle,jdbcType=VARCHAR},
+      UID = #{record.uid,jdbcType=BIGINT},
+      UNAME = #{record.uname,jdbcType=VARCHAR},
+      LINKMAN = #{record.linkman,jdbcType=VARCHAR},
+      MOBILE = #{record.mobile,jdbcType=VARCHAR},
+      CREATEDATE = #{record.createdate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tk.model.ActivitySignup" >
+    update activity_signup
+    <set >
+      <if test="aid != null" >
+        AID = #{aid,jdbcType=BIGINT},
+      </if>
+      <if test="atitle != null" >
+        ATITLE = #{atitle,jdbcType=VARCHAR},
+      </if>
+      <if test="uid != null" >
+        UID = #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="uname != null" >
+        UNAME = #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="linkman != null" >
+        LINKMAN = #{linkman,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        MOBILE = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        CREATEDATE = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tk.model.ActivitySignup" >
+    update activity_signup
+    set AID = #{aid,jdbcType=BIGINT},
+      ATITLE = #{atitle,jdbcType=VARCHAR},
+      UID = #{uid,jdbcType=BIGINT},
+      UNAME = #{uname,jdbcType=VARCHAR},
+      LINKMAN = #{linkman,jdbcType=VARCHAR},
+      MOBILE = #{mobile,jdbcType=VARCHAR},
+      CREATEDATE = #{createdate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
