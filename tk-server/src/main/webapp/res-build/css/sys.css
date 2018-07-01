@@ -1,0 +1,60 @@
+/* module */
+.portlet-module{}
+.portlet-module .form-body{padding: 15px; }
+
+.auth-maintain{display: none;}
+.auth-maintain-show{}
+.auth-maintain .sub-mod-nmae,.auth-maintain-show .sub-mod-nmae{padding-left: 32px}
+.auth-maintain a.iconfont{font-size: 20px;text-decoration: none }
+
+/*.auth-maintain a.iconfont:hover,.auth-maintain a.iconfont:active{text-decoration: none}*/
+.account-role-wrap .account-has-role-con{padding-bottom: 10px; border-bottom: 1px solid #e5e5e5; margin-bottom: 20px;}
+
+#selImg .iconfont{ font-size: 20px;   line-height: 20px;}
+
+.doctor-nonelist-wrap{text-align: center; padding-top: 30px}
+.doctor-nonelist-wrap p{font-size: 14px}
+.doctor-nonelist-wrap .iconfont{font-size: 64px}
+.appmodule-wrap{display: none}
+
+
+.region-index{}
+.region-index dt,.region-index dd{line-height: 2.2;  }
+
+
+.app-indexcon,.alipaycon-index,.appMycon-index{}
+.app-indexcon dt,.app-indexcon dd,.alipaycon-index dt,.alipaycon-index dd,.appMycon-index dt,.appMycon-index dd{line-height: 2.2;  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

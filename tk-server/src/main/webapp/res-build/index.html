@@ -1,0 +1,358 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+
+    <title>管理平台</title>
+    <link href="css/reset.css" rel="stylesheet" type="text/css"/>
+    <link href="res/bootstrap-3.3.2/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <!--[if lt IE 9]>
+      <link href="res/bootstrap-3.3.2/css/ie8.min.css" rel="stylesheet">
+    <![endif]-->
+    <link href="css/layout.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="res/jquery/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="res/bootstrap-3.3.2/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="res/seajs-3.0.0/dist/sea.js"></script>
+
+</head>
+
+<body>
+<div id="page" class="page-header-fixed">
+    <!-- B:page-header -->
+    <div class="page-header clearfix header-fixed">
+        <div class="page-header-inner">
+            <div class="page-logo">
+                <a href="index.html">
+                    <img src="img/logo.png" alt="logo" class="logo-default">
+                </a>
+            </div><!--<!--href="#page-sidebar-menu" aria-expanded="false" aria-controls="collapseExample" data-toggle="collapse" data-target=".navbar-collapse"-->
+            <a class="sidebar-toggler" data-toggle="collapse" href="#page-sidebar" aria-expanded="false"
+               aria-controls="page-sidebar"><i
+                    class="iconfont">&#xe603;</i></a>
+            <div class="top-menu">
+                <ul class="nav top-tools">
+                    <li class="top-tools-item dropdown">
+                        <a href="#" class="top-tools-item-a top-notification">
+                            <i class="iconfont">&#xe600;</i>
+                            <span class="tool-name">消息</span>
+                            <span class="badge">4</span>
+                        </a>
+
+                        <div class="dropdown-menu dropdown-notification">
+                            <div class="dropdown-menu-con "></div>
+                        </div>
+                    </li>
+                    <li class="top-tools-item dropdown top-userbox">
+                        <a href="#" class="top-tools-item-a top-user">
+                            <img alt="" class="img-circle hide1" src="img/avatar3_small.jpg">
+                            <span class="username username-hide-on-mobile">Nick Name</span>
+                            <i class="iconfont">&#xe606;</i>
+                        </a>
+
+                        <div class="dropdown-menu dropdown-notification">
+                            <div class="dropdown-menu-con "></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- E:page-header -->
+    <!-- B:page-container -->
+    <div class="page-container clearfix">
+        <!-- B:page-sidebar -->
+        <div class="page-sidebar-wrapper">
+            <div class="page-sidebar sidebar-fixed navbar-collapse collapse" id="page-sidebar"><!-- page-sidebar-in -->
+                <div class="page-sidebar-menu" id="page-sidebar-menu" data-slide-speed="200">
+                    <div class="page-sidebar-tit clearfix">
+                        <h3>导航</h3>
+                        <a href="#" class="sidebar-toggler"><i class="iconfont">&#xe603;</i>
+                        </a>
+                    </div>
+                    <ul class="page-sidebar-menu-ul">
+                        <li class="menu-item open active">
+                            <!-- open active -->
+                            <a href="javascript:" class="menu-item-a">
+                                <i class="iconfont">&#xe604;</i>
+                                <span class="title">系统配置</span>
+                                <span class="selected"></span>
+                                <i class="iconfont arrow"></i>
+                            </a>
+                            <ul class="sub-menu sub-menu-hide" data-code="RMsg">
+                                <li class="sub-menu-item sub-active">
+                                    <!-- active --><a class="ajaxify" href="/admin/sys/module">模块管理</a>
+                                </li>
+                                <li class="sub-menu-item"><a class="ajaxify" href="/admin/sys/role">角色管理</a>
+                                </li>
+                                <li class="sub-menu-item"><a class="ajaxify" href="/admin/sys/adminAccount">后台账户管理</a>
+                                </li>
+                                <li class="sub-menu-item"><a class="ajaxify" href="/admin/sys/appversion">APP更新</a>
+                                </li>
+                                <li class="sub-menu-item"><a class="ajaxify" href="/admin/sys/dictionary">数据字典</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="menu-item">
+                            <!-- open active -->
+                            <a href="javascript:" class="menu-item-a">
+                                <i class="iconfont">&#xe604;</i>
+                                <span class="title">系统配置</span>
+                                <span class="selected"></span>
+                                <i class="iconfont arrow"></i>
+                            </a>
+                            <ul class="sub-menu sub-menu-hide" data-code="RMsg">
+                                <li class="sub-menu-item ">
+                                    <!-- active --><a class="ajaxify" href="/admin/sys/module">模块管理</a>
+                                </li>
+                                <li class="sub-menu-item"><a class="ajaxify" href="/admin/sys/role">角色管理</a>
+                                </li>
+                                <li class="sub-menu-item"><a class="ajaxify" href="/admin/sys/adminAccount">后台账户管理</a>
+                                </li>
+                                <li class="sub-menu-item"><a class="ajaxify" href="/admin/sys/appversion">APP更新</a>
+                                </li>
+                                <li class="sub-menu-item"><a class="ajaxify" href="/admin/sys/dictionary">数据字典</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="menu-item">
+                            <!-- open active -->
+                            <a href="javascript:" class="menu-item-a">
+                                <i class="iconfont">&#xe604;</i>
+                                <span class="title">系统配置</span>
+                                <span class="selected"></span>
+                                <i class="iconfont arrow"></i>
+                            </a>
+                            <ul class="sub-menu sub-menu-hide" data-code="RMsg">
+                                <li class="sub-menu-item ">
+                                    <!-- active --><a class="ajaxify" href="/admin/sys/module">模块管理</a>
+                                </li>
+                                <li class="sub-menu-item"><a class="ajaxify" href="/admin/sys/role">角色管理</a>
+                                </li>
+                                <li class="sub-menu-item"><a class="ajaxify" href="/admin/sys/adminAccount">后台账户管理</a>
+                                </li>
+                                <li class="sub-menu-item"><a class="ajaxify" href="/admin/sys/appversion">APP更新</a>
+                                </li>
+                                <li class="sub-menu-item"><a class="ajaxify" href="/admin/sys/dictionary">数据字典</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="menu-item">
+                            <!-- open active -->
+                            <a href="javascript:" class="menu-item-a">
+                                <i class="iconfont">&#xe604;</i>
+                                <span class="title">系统配置</span>
+                                <span class="selected"></span>
+                                <i class="iconfont arrow"></i>
+                            </a>
+                            <ul class="sub-menu sub-menu-hide" data-code="RMsg">
+                                <li class="sub-menu-item ">
+                                    <!-- active --><a class="ajaxify" href="/admin/sys/module">模块管理</a>
+                                </li>
+                                <li class="sub-menu-item"><a class="ajaxify" href="/admin/sys/role">角色管理</a>
+                                </li>
+                                <li class="sub-menu-item"><a class="ajaxify" href="/admin/sys/adminAccount">后台账户管理</a>
+                                </li>
+                                <li class="sub-menu-item"><a class="ajaxify" href="/admin/sys/appversion">APP更新</a>
+                                </li>
+                                <li class="sub-menu-item"><a class="ajaxify" href="/admin/sys/dictionary">数据字典</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="menu-item">
+                            <!-- open active -->
+                            <a href="javascript:" class="menu-item-a">
+                                <i class="iconfont">&#xe604;</i>
+                                <span class="title">系统配置</span>
+                                <span class="selected"></span>
+                                <i class="iconfont arrow"></i>
+                            </a>
+                            <ul class="sub-menu sub-menu-hide" data-code="RMsg">
+                                <li class="sub-menu-item ">
+                                    <!-- active --><a class="ajaxify" href="/admin/sys/module">模块管理</a>
+                                </li>
+                                <li class="sub-menu-item"><a class="ajaxify" href="/admin/sys/role">角色管理</a>
+                                </li>
+                                <li class="sub-menu-item"><a class="ajaxify" href="/admin/sys/adminAccount">后台账户管理</a>
+                                </li>
+                                <li class="sub-menu-item"><a class="ajaxify" href="/admin/sys/appversion">APP更新</a>
+                                </li>
+                                <li class="sub-menu-item"><a class="ajaxify" href="/admin/sys/dictionary">数据字典</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="menu-item">
+                            <!-- open active -->
+                            <a href="javascript:" class="menu-item-a">
+                                <i class="iconfont">&#xe604;</i>
+                                <span class="title">系统配置</span>
+                                <span class="selected"></span>
+                                <i class="iconfont arrow"></i>
+                            </a>
+                            <ul class="sub-menu sub-menu-hide" data-code="RMsg">
+                                <li class="sub-menu-item ">
+                                    <!-- active --><a class="ajaxify" href="/admin/sys/module">模块管理</a>
+                                </li>
+                                <li class="sub-menu-item"><a class="ajaxify" href="/admin/sys/role">角色管理</a>
+                                </li>
+                                <li class="sub-menu-item"><a class="ajaxify" href="/admin/sys/adminAccount">后台账户管理</a>
+                                </li>
+                                <li class="sub-menu-item"><a class="ajaxify" href="/admin/sys/appversion">APP更新</a>
+                                </li>
+                                <li class="sub-menu-item"><a class="ajaxify" href="/admin/sys/dictionary">数据字典</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- E:page-sidebar -->
+        <!-- B:page-content -->
+        <div class="page-content-wrapper">
+            <div class="page-content" id="page-content">
+                <div class="page-content-body">
+                    <div class="page-content-header">
+                        <h3 class="page-title">
+                            管理总览
+                            <small>总览与统计</small>
+                        </h3>
+                        <div class="page-bar">
+                            <ul class="page-breadcrumb">
+                                <li>
+                                    <i class="iconfont"></i>
+                                    <a href="index.html">首页</a>
+                                    <i class="iconfont"></i>
+                                </li>
+                                <li>
+                                    <a href="#">总览</a>
+                                </li>
+                            </ul>
+
+                        </div>
+                        <div class="row" style="height: 2000px">
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="dashboard-stat blue-madison">
+                                    <div class="visual">
+                                        <i class="fa fa-comments"></i>
+                                    </div>
+                                    <div class="details">
+                                        <div class="number">
+                                            1042
+                                        </div>
+                                        <div class="desc">
+                                            接口一
+                                        </div>
+                                    </div>
+                                    <a class="more" href="#">
+                                        更多 <i class="m-icon-swapright m-icon-white"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="dashboard-stat red-intense">
+                                    <div class="visual">
+                                        <i class="fa fa-bar-chart-o"></i>
+                                    </div>
+                                    <div class="details">
+                                        <div class="number">
+                                            1042
+                                        </div>
+                                        <div class="desc">
+                                            接口二
+                                        </div>
+                                    </div>
+                                    <a class="more" href="#">
+                                        更多 <i class="m-icon-swapright m-icon-white"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="dashboard-stat green-haze">
+                                    <div class="visual">
+                                        <i class="fa fa-shopping-cart"></i>
+                                    </div>
+                                    <div class="details">
+                                        <div class="number">
+                                            1042
+                                        </div>
+                                        <div class="desc">
+                                            接口一
+                                        </div>
+                                    </div>
+                                    <a class="more" href="#">
+                                        更多 <i class="m-icon-swapright m-icon-white"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="dashboard-stat purple-plum">
+                                    <div class="visual">
+                                        <i class="fa fa-globe"></i>
+                                    </div>
+                                    <div class="details">
+                                        <div class="number">
+                                            1042
+                                        </div>
+                                        <div class="desc">
+                                            接口一
+                                        </div>
+                                    </div>
+                                    <a class="more" href="#">
+                                        更多 <i class="m-icon-swapright m-icon-white"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                          Launch demo modal
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                              </div>
+                              <div class="modal-body">
+                                ...
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- E:page-content -->
+    </div>
+    <!-- E:page-container -->
+    <!-- B:page-footer -->
+    <div class="page-footer clearfix">
+        <div class="page-footer-inner">
+            2015 © 创业软件股份有限公司
+        </div>
+        <div class="page-footer-tools">
+                <span class="go-top">
+                    <i class="iconfont">&#xe602;</i>
+                </span>
+        </div>
+    </div>
+    <!-- E:page-footer -->
+</div>
+<script type="text/javascript" src="config.js"></script>
+<script type="text/javascript">
+    seajs.use("src/index.js")
+</script>
+</body>
+
+</html>

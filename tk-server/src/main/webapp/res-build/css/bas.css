@@ -1,0 +1,26 @@
+#selImg .iconfont,#selImg2 .iconfont,#selImg3 .iconfont{ font-size: 20px;   line-height: 20px;}
+#imgurl,#imgurl2,#imgurl3{display: none; height: 34px; line-height: 34px;}
+.doctor-nonelist-wrap{text-align: center; padding-top: 30px}
+.doctor-nonelist-wrap p{font-size: 14px}
+.doctor-nonelist-wrap .iconfont{font-size: 64px}
+
+/* jGrowl */
+.jGrowl{z-index:9999;text-align:center;position:fixed;left:50%;top:-70px;margin-left:-125px;width:250px;height:auto;overflow:hidden;}
+.jGrowl .info,
+.jGrowl .error,
+.jGrowl .success,
+.jGrowl .warn{color:#fff;font-size: 12px;font-weight: bold;line-height: 20px;border-radius: 0 0 3px 3px;padding:5px 10px;}
+.jGrowl .info,.jGrowl .error,.jGrowl .success,.jGrowl .warn{background:url(../img/jGrow-bg.png) repeat;}
+.jGrowl span{background:url(../img/jGrowl.png) no-repeat;width:22px;height:22px;display:inline-block;*display:inline;*zoom:1;vertical-align:middle;}
+.jGrowl .info span{background:none;}
+.jGrowl .warn span{background-position:0 -26px}
+.jGrowl .error span{background-position:0 0}
+.jGrowl .success span{background-position:0 -54px}
+div.jGrowl div.jGrowl-notification{
+	zoom:1;
+	font-size:12px;
+	text-align:center;
+	display:none;
+	color:#333;
+}
+.dispNone{ display: none }

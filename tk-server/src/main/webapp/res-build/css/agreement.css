@@ -1,0 +1,12 @@
+body { font-size: 12px; line-height: 1.5; }
+.agreement-content{padding: 10px; }
+.agreement-content h1{font-size: 16px; text-align: center; }
+.agreement-content .agreement-con{margin-top: 10px;}
+.agreement-content h2{margin-top: 30px; font-size: 14px; }
+.agreement-content p{margin-bottom: 10px; text-indent: 2em;}
+.agreement-content .agreement-con > ol{list-style: decimal; margin-left: 16px; padding: 0 0 0 10px; }
+.agreement-content .agreement-con > ol>li{list-style: decimal; margin: 10px 0 0 0; padding: 0px;  }
+.agreement-content .agreement-con > ol>li ol{margin: 10px 0 0 0; /*list-style: circle*/}
+.agreement-content .agreement-con > ol>li li{padding-left: 0px; margin: 3px 0 0 0; }
+.agreement-content .agreement-con > ul{margin-left: 16px; padding: 0 0 0 10px;}
+.agreement-pal-h2 h2{margin-left: 16px; }

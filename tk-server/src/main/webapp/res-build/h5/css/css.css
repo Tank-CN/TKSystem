@@ -1,0 +1,9 @@
+.news_title{width: 100%; padding:0 3%; border-bottom: 0.1rem #ccc solid; font-size: 2.6rem;box-sizing:border-box;}
+.news_title h3{ color:#35b46f; line-height: 4rem;font-size: 3rem;padding-top:2rem; }
+.news_title p{  line-height: 4rem; color: #9d9d9d }
+.news_content{width: 100%; padding:3rem 3%;font-size: 2.6rem; color: #323232;box-sizing:border-box;line-height:4rem; }
+.news_content *{ margin:3rem 0!important;; width: 100%!important; height: 100%!important; display: block!important;max-width: 100%!important;min-width: 100%!important;box-sizing:border-box!important;}
+
+
+
+
