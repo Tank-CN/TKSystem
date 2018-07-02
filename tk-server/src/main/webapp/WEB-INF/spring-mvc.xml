@@ -52,6 +52,6 @@
 
 
 	<!-- 定义无Controller的path<->view直接映射 -->
-	<mvc:view-controller path="/" view-name="redirect:/adminlogin" />
+	<mvc:view-controller path="/admin" view-name="redirect:/adminlogin" />
 
 </beans>

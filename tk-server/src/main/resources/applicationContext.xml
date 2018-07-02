@@ -146,22 +146,9 @@
         <aop:advisor advice-ref="druid-stat-interceptor" pointcut-ref="druid-stat-pointcut"/>
     </aop:config>
 
-    <bean id="imageUploadService" class="com.bs.util.HttpPostUploadUtil">
+    <bean id="imageUploadService" class="com.tk.util.HttpPostUploadUtil">
         <property name="uploadUrl" value="${image_url}" />
         <property name="netServiceUrl" value="${net_image_url}" />
     </bean>
-
-    <bean id="jpushClient" class="cn.jpush.api.JPushClient">
-        <constructor-arg value="${JPush_MasterSecret}"/>
-        <constructor-arg value="${JPush_AppKey}"/>
-    </bean>
-
-    <bean id="easemobService" class="com.tk.easemob.EasemobService" init-method="initEasemobUtils">
-        <property name="appKey" value="${EASEMOB_APPKEY}"/>
-        <property name="appClientId" value="${EASEMOB_APP_CLIENT_ID}"/>
-        <property name="appClientSecret" value="${EASEMOB_APP_CLIENT_SECRET}"/>
-    </bean>
-
-
 
 </beans>

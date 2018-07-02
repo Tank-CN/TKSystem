@@ -34,7 +34,7 @@ package com.tk;
 public class Constants {
 
 	// 加密Key
-	public static final String DES_KEY = "irsystem";
+	public static final String DES_KEY = "tksystem";
 
 
 }
