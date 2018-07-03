@@ -54,7 +54,7 @@ public class LoginController extends AdminBaseController {
 
     @RequestMapping(value = "adminlogin")
     public String login() {
-        return "adminlogin";
+        return "admin/adminlogin";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
