@@ -1,6 +1,5 @@
 package com.tk.controller.api;
 
-import com.tk.manage.BasBusinessManage;
 import com.tk.manage.DynamicManage;
 import com.tk.manage.UserManage;
 import com.tk.model.User;
@@ -29,9 +28,6 @@ public class UserInfoController extends ApiBaseController {
     UserManage userManage;
 
     @Autowired
-    BasBusinessManage basBusinessManage;
-
-    @Autowired
     DynamicManage dynamicManage;
 
 
@@ -50,7 +46,6 @@ public class UserInfoController extends ApiBaseController {
             return resMap;
         }
         MyInfoVo vo = new MyInfoVo();
-        vo.setBusinessCollectCount(basBusinessManage.countByCollect(uid));
         vo.setDynamicCount(dynamicManage.countByUid(uid));
 //        User user = userManage.getUserById(uid);
 //        if (null != user) {
@@ -64,7 +59,7 @@ public class UserInfoController extends ApiBaseController {
 //            userVo.setVip(user.getVip());
 //            vo.setUserVo(userVo);
 //        }
-        vo.setUserVo(userManage.getUserVo(uid));
+//        vo.setUserVo(userManage.getUserVo(uid));
         resMap.put("data", vo);
         resMap.put("code", ResultCode.SUCCESS);
         return resMap;
@@ -86,7 +81,7 @@ public class UserInfoController extends ApiBaseController {
             resMap.put("code", ResultCode.PARAMETERS_EMPTY);
             return resMap;
         }
-        resMap.put("data", userManage.getUserVo(Long.valueOf(uid)));
+//        resMap.put("data", userManage.getUserVo(Long.valueOf(uid)));
         resMap.put("code", ResultCode.SUCCESS);
         return resMap;
     }
@@ -107,7 +102,7 @@ public class UserInfoController extends ApiBaseController {
             resMap.put("code", ResultCode.PARAMETERS_EMPTY);
             return resMap;
         }
-        resMap.put("data", userManage.getUserVoByEB(ids));
+//        resMap.put("data", userManage.getUserVoByEB(ids));
         resMap.put("code", ResultCode.SUCCESS);
         return resMap;
     }
@@ -205,7 +200,7 @@ public class UserInfoController extends ApiBaseController {
             resMap.put("msg", "修改失败,联系管理员");
             return resMap;
         }
-        userManage.restUserCache(uid);
+//        userManage.restUserCache(uid);
         resMap.put("code", ResultCode.SUCCESS);
         resMap.put("msg", "修改成功");
         return resMap;
@@ -239,7 +234,7 @@ public class UserInfoController extends ApiBaseController {
             resMap.put("msg", "修改失败,联系管理员");
             return resMap;
         }
-        userManage.restUserCache(uid);
+//        userManage.restUserCache(uid);
         resMap.put("code", ResultCode.SUCCESS);
         resMap.put("msg", "修改成功");
         return resMap;
@@ -273,7 +268,7 @@ public class UserInfoController extends ApiBaseController {
             resMap.put("msg", "修改失败,联系管理员");
             return resMap;
         }
-        userManage.restUserCache(uid);
+//        userManage.restUserCache(uid);
         resMap.put("code", ResultCode.SUCCESS);
         resMap.put("msg", "修改成功");
         return resMap;
@@ -307,7 +302,7 @@ public class UserInfoController extends ApiBaseController {
             resMap.put("msg", "修改失败,联系管理员");
             return resMap;
         }
-        userManage.restUserCache(uid);
+//        userManage.restUserCache(uid);
         resMap.put("code", ResultCode.SUCCESS);
         resMap.put("msg", "修改成功");
         return resMap;

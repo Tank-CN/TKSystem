@@ -80,7 +80,7 @@ public class FileController extends ApiBaseController {
 			account.setId(uid);
 			if (userManage.updateUser(account)) {
 				//修改用户缓存
-				userManage.restUserCache(uid);
+//				userManage.restUserCache(uid);
 				resMap.put("code", ResultCode.SUCCESS);
 				resMap.put("msg", "头像上传成功");
 				resMap.put("data", account.getHeader());

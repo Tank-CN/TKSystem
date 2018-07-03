@@ -1,9 +1,7 @@
 package com.tk.manage;
 
 import com.tk.cache.UserInfoCache;
-import com.tk.model.User;
 import com.tk.util.CommonUtils;
-import com.tk.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -75,27 +73,6 @@ public class BaseManage {
     }
 
 
-    public UserVo getUserVo(Long uid) {
-        UserVo userVo = userInfoCache.get(uid);
-        return userVo;
-    }
-
-    public UserVo getUserVo(User user) {
-        UserVo userVo = new UserVo();
-        userVo.setNickname(user.getNickname());
-        userVo.setHeader(user.getHeader());
-        userVo.setBirthdate(user.getBirthdate());
-        userVo.setMobile(user.getMobile());
-        userVo.setId(user.getId());
-        userVo.setInfo(user.getInfo());
-        userVo.setSexcode(user.getSexcode());
-        userVo.setVip(user.getVip());
-        return userVo;
-    }
-
-    public void restUserCache(Long uid){
-        userInfoCache.resetCache(uid);
-    }
 
 
 

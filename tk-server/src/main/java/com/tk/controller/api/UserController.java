@@ -1,7 +1,6 @@
 package com.tk.controller.api;
 
 import com.tk.Constants;
-import com.tk.cache.DeviceCacheManage;
 import com.tk.manage.BasPhoneCaptchaManage;
 import com.tk.manage.UserManage;
 import com.tk.model.BasPhoneCaptcha;
@@ -41,8 +40,7 @@ public class UserController extends ApiBaseController{
     @Resource(name = "smsService")
     SmsService smsService;
 
-    @Autowired
-    DeviceCacheManage deviceCacheManage;
+
 
 
     /**
@@ -168,7 +166,7 @@ public class UserController extends ApiBaseController{
         device.setDeviceName(devicename);
         device.setDeviceSysVersion(devicesysversion);
         device.setModifydate(new Date());
-        deviceCacheManage.deviceInfo(device);
+//        deviceCacheManage.deviceInfo(device);
     }
 
 
@@ -201,7 +199,7 @@ public class UserController extends ApiBaseController{
         device.setDeviceName(devicename);
         device.setDeviceSysVersion(devicesysversion);
         device.setModifydate(new Date());
-        deviceCacheManage.deviceInfo(device);
+//        deviceCacheManage.deviceInfo(device);
         resMap.put("code", ResultCode.SUCCESS);
         resMap.put("msg", "绑定成功");
         return resMap;
@@ -225,7 +223,7 @@ public class UserController extends ApiBaseController{
         }
         // 删除设备绑定信息
         //// TODO: 2016/7/4
-        deviceCacheManage.logout(uid);
+//        deviceCacheManage.logout(uid);
         resMap.put("code", ResultCode.SUCCESS);
         resMap.put("msg", "退出成功");
         return resMap;

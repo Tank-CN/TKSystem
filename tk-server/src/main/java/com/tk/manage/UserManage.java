@@ -7,12 +7,10 @@ import com.tk.model.UserExample;
 import com.tk.model.UserInfo;
 import com.tk.util.CommonUtils;
 import com.tk.util.encryption.MD5Utils;
-import com.tk.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -80,39 +78,8 @@ public class UserManage extends BaseManage {
         return userExMapper.selectByPrimaryKey(id);
     }
 
-    /**
-     * 开通VIP
-     * @param uid
-     * @return
-     */
-    public  boolean vip(Long uid){
-        User user=new User();
-        user.setId(uid);
-        user.setVip(Byte.valueOf("1"));
-        user.setViptime(new Date());
-        if(userExMapper.updateByPrimaryKeySelective(user)>0){
-            restUserCache(uid);
-            return true;
-        }
-        return false;
-    }
 
 
-    /**
-     * 开通VIP
-     * @param uid
-     * @return
-     */
-    public  boolean unvip(Long uid){
-        User user=new User();
-        user.setId(uid);
-        user.setVip(Byte.valueOf("0"));
-        if(userExMapper.updateByPrimaryKeySelective(user)>0){
-            restUserCache(uid);
-            return true;
-        }
-        return false;
-    }
 
 
     /**
@@ -379,26 +346,6 @@ public class UserManage extends BaseManage {
     }
 
 
-    public List<UserVo> getUserVoByEB(String phones) {
-        ArrayList<UserVo> data = new ArrayList<>();
-        String[] arr = phones.split(",");
-        if (null != arr && arr.length > 0) {
-            List<String> ids=new ArrayList<>();
-            for (int i = 0; i < arr.length; i++) {
-                ids.add(arr[i].substring(2));
-            }
-            UserExample example=new UserExample();
-            UserExample.Criteria criteria= example.createCriteria();
-            criteria.andMobileIn(ids);
-            List<User> users=userExMapper.selectByExample(example);
-            if(null!=users&&users.size()>0){
-                for(User user:users){
-                    data.add(getUserVo(user));
-                }
-            }
-        }
-        return data;
-    }
 
 
 }

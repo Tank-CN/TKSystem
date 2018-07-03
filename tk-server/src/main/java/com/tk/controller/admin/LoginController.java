@@ -1,14 +1,11 @@
 package com.tk.controller.admin;
 
-import com.tk.manage.AdminManage;
-import com.tk.manage.SysModuleManage;
-import com.tk.manage.SysRoleManage;
-import com.tk.manage.SysUserRoleManage;
-import com.tk.model.Admin;
+
+import com.tk.manage.AdminUserManage;
+import com.tk.model.AdminUser;
 import com.tk.util.CommonUtils;
 import com.tk.util.ResultCode;
 import com.tk.util.encryption.MD5Utils;
-import com.tk.vo.ModuleVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 
@@ -26,16 +22,9 @@ import java.util.Map;
 public class LoginController extends AdminBaseController {
 
     @Autowired
-    AdminManage adminManage;
+    AdminUserManage adminUserManage;
 
-    @Autowired
-    SysUserRoleManage basUserRoleManage;
 
-    @Autowired
-    SysRoleManage sysRoleManage;
-
-    @Autowired
-    SysModuleManage sysModuleManage;
 
     @RequestMapping(value = "adminlogin")
     public String login() {
@@ -53,7 +42,7 @@ public class LoginController extends AdminBaseController {
             return resMap;
         }
 
-        Admin admin = adminManage.getAdminByUsername(username);
+        AdminUser admin = adminUserManage.getAdminUserByUsername(username);
         if (admin == null) {
             resMap.put("code", ResultCode.ERROR);
             resMap.put("msg", "未找到该用户或该用户已经注销");
@@ -65,30 +54,11 @@ public class LoginController extends AdminBaseController {
             resMap.put("msg", "该用户无权限登录本系统");
             return resMap;
         }
-        List<ModuleVo> moduleList = null;
-        if (admin.getUtype() == 0) {
-            // 后台管理员
-            if (isSuperAdmin(admin)) {
-                // 超级管理员
-                moduleList = sysModuleManage.getByAdmin();
-            } else {
-                moduleList = sysModuleManage.getByUid(admin.getId());
-            }
-        } else if (admin.getUtype() == 2) {
-            // 商家角色
-            moduleList = sysModuleManage.getByRole((long) 2);
-        }
 
-        if (null == moduleList || moduleList.size() == 0) {
-            resMap.put("code", ResultCode.ERROR);
-            resMap.put("msg", "该用户目前无任何权限，请联系管理员");
-            return resMap;
-        }
 
         password = MD5Utils.getMD5(password);
         if (password.equals(admin.getPassword())) {
             request.getSession().setAttribute("admin", admin);
-            request.getSession().setAttribute("modules", moduleList);
             resMap.put("code", ResultCode.SUCCESS);
             resMap.put("msg", "登录成功");
             return resMap;

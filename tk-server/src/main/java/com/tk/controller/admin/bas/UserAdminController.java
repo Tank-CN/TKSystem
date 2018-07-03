@@ -57,18 +57,5 @@ public class UserAdminController extends AdminBaseController {
     }
 
 
-    @RequestMapping(value = "user/vip/{id}", method = RequestMethod.POST)
-    @ResponseBody
-    public Boolean vip(@PathVariable("id") Long id) {
-        return userManage.vip(id);
 
-    }
-
-
-    @RequestMapping(value = "user/unvip/{id}", method = RequestMethod.POST)
-    @ResponseBody
-    public Boolean unvip(@PathVariable("id") Long id) {
-        return userManage.unvip(id);
-
-    }
 }

@@ -1,8 +1,6 @@
 package com.tk.controller;
 
-import com.tk.manage.BasBusinessManage;
 import com.tk.manage.NewsManage;
-import com.tk.model.BasBusiness;
 import com.tk.model.News;
 import com.tk.util.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +17,6 @@ public class ViewController {
     @Autowired
     NewsManage newsManage;
 
-    @Autowired
-    BasBusinessManage basBusinessManage;
 
     @RequestMapping(value = "newsdetail/{id}")
     public ModelAndView newsdetail(@PathVariable("id") Long id) {
@@ -32,12 +28,4 @@ public class ViewController {
     }
 
 
-    @RequestMapping(value = "businessdetail/{id}")
-    public ModelAndView businessdetail(@PathVariable("id") Long id) {
-        ModelAndView modelAndView = new ModelAndView("h5/businessdetail");
-        BasBusiness vo=basBusinessManage.getById(id);
-        modelAndView.addObject("vo", vo);
-        modelAndView.addObject("time", DateUtils.dateFormate(vo.getCreatedate(),"yyyy-MM-dd"));
-        return modelAndView;
-    }
 }

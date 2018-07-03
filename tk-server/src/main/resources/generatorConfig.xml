@@ -12,8 +12,8 @@
 		</commentGenerator>
 		<!--数据库链接URL，用户名、密码 -->
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-			connectionURL="jdbc:mysql://localhost:3306/irsystem" userId="root"
-			password="111111">
+			connectionURL="jdbc:mysql://61.164.39.67:10836/tksystem" userId="root"
+			password="tank123">
 		</jdbcConnection>
 		<javaTypeResolver>
 			<property name="forceBigDecimals" value="false" />
@@ -36,6 +36,8 @@
 		</javaClientGenerator>
 		<!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名 -->
 
+
+		<!--<table tableName="bas_dictionary"></table>-->
 
 		<!--<table tableName="business_collect"></table>-->
 		<!--<table tableName="dynamic_reply"></table>-->
