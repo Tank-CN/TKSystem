@@ -2,9 +2,12 @@ package com.tk.mapper;
 
 import com.tk.model.BasDictionary;
 import com.tk.model.BasDictionaryExample;
-import java.util.List;
+import com.tk.util.annotation.BatisRepository;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
+@BatisRepository
 public interface BasDictionaryMapper {
     int countByExample(BasDictionaryExample example);
 

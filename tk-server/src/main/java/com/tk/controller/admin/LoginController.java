@@ -6,6 +6,8 @@ import com.tk.model.AdminUser;
 import com.tk.util.CommonUtils;
 import com.tk.util.ResultCode;
 import com.tk.util.encryption.MD5Utils;
+import com.tk.vo.admin.ModuleVo;
+import com.tk.vo.admin.SubModuleVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -24,6 +28,28 @@ public class LoginController extends AdminBaseController {
     @Autowired
     AdminUserManage adminUserManage;
 
+
+    static List<ModuleVo> moduleList = null;
+
+    static {
+        moduleList = new ArrayList<>();
+        ModuleVo vo1=new ModuleVo("c1","系统管理");
+        vo1.addSub(new SubModuleVo("字典管理","/admin/index"));
+        vo1.addSub(new SubModuleVo("广告管理","/admin/index"));
+        vo1.addSub(new SubModuleVo("c13","区域管理","/admin/index"));
+
+        ModuleVo vo2=new ModuleVo("c2","用户管理");
+        vo2.addSub(new SubModuleVo("管理员用户","/admin/index"));
+        vo2.addSub(new SubModuleVo("注册用户","/admin/index"));
+
+        ModuleVo vo3=new ModuleVo("c3","日志管理");
+        vo3.addSub(new SubModuleVo("后台日志","/admin/index"));
+        vo3.addSub(new SubModuleVo("操作日志","/admin/index"));
+
+        moduleList.add(vo1);
+        moduleList.add(vo2);
+        moduleList.add(vo3);
+    }
 
 
     @RequestMapping(value = "adminlogin")
@@ -49,7 +75,7 @@ public class LoginController extends AdminBaseController {
             return resMap;
         }
 
-        if (!(admin.getUtype().intValue()== 0 || admin.getUtype().intValue()== 1)) {
+        if (!(admin.getUtype().intValue() == 1)) {
             resMap.put("code", ResultCode.ERROR);
             resMap.put("msg", "该用户无权限登录本系统");
             return resMap;
@@ -59,6 +85,7 @@ public class LoginController extends AdminBaseController {
         password = MD5Utils.getMD5(password);
         if (password.equals(admin.getPassword())) {
             request.getSession().setAttribute("admin", admin);
+            request.getSession().setAttribute("modules", moduleList);
             resMap.put("code", ResultCode.SUCCESS);
             resMap.put("msg", "登录成功");
             return resMap;

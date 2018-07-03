@@ -16,7 +16,7 @@
     <link href="${ctx}/res-build/css/reset.css" rel="stylesheet" type="text/css"/>
     <link href="${ctx}/res-build/res/bootstrap-3.3.2/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <!--[if lt IE 9]>
-      <link href="${ctx}/res-build/res/bootstrap-3.3.2/css/ie8.min.css" rel="stylesheet">
+    <link href="${ctx}/res-build/res/bootstrap-3.3.2/css/ie8.min.css" rel="stylesheet">
     <![endif]-->
     <link href="${ctx}/res-build/css/layout.css" rel="stylesheet" type="text/css"/>
     <sitemesh:getProperty property="page.cssconfig"/>
@@ -35,7 +35,8 @@
                 <a href="${ctx}/admin/index">
                     管理平台
                 </a>
-            </div><!--<!--href="#page-sidebar-menu" aria-expanded="false" aria-controls="collapseExample" data-toggle="collapse" data-target=".navbar-collapse"-->
+            </div>
+            <!--<!--href="#page-sidebar-menu" aria-expanded="false" aria-controls="collapseExample" data-toggle="collapse" data-target=".navbar-collapse"-->
             <a class="sidebar-toggler" data-toggle="collapse" href="#page-sidebar" aria-expanded="false"
                aria-controls="page-sidebar"><i
                     class="iconfont">&#xe603;</i></a>
@@ -86,23 +87,24 @@
                         </a>
                     </div>
                     <ul class="page-sidebar-menu-ul">
-                    <c:forEach items="${sessionScope.modules}" var="vo" varStatus="status">
-                    	<li class="menu-item <c:if test='${vo.code == pcode}'>open active</c:if>">
-                            <a href="javascript:" class="menu-item-a">
-                                <i class="iconfont">&#xe604;</i>
-                                <span class="title">${vo.title}</span>
-                                <span class="selected"></span>
-                                <i class="iconfont arrow"></i>
-                            </a>
-                            <ul class="sub-menu sub-menu-hide" data-code="RMsg">
-                                <c:forEach items="${vo.list}" var="subvo" varStatus="substatus">
-	                                <li class="sub-menu-item <c:if test='${subvo.code==subcode}'>sub-active</c:if>">
-	                                <a class="ajaxify" href='${ctx}${subvo.url}?pcode=${subvo.pcode}&subcode=${subvo.code}'>${subvo.title}</a>
-	                                </li>
-                            	</c:forEach>
-                            </ul>
-                        </li>
-                    </c:forEach>
+                        <c:forEach items="${sessionScope.modules}" var="vo" varStatus="status">
+                            <li class="menu-item <c:if test='${vo.code == pcode}'>open active</c:if>">
+                                <a href="javascript:" class="menu-item-a">
+                                    <i class="iconfont">&#xe604;</i>
+                                    <span class="title">${vo.title}</span>
+                                    <span class="selected"></span>
+                                    <i class="iconfont arrow"></i>
+                                </a>
+                                <ul class="sub-menu sub-menu-hide" data-code="RMsg">
+                                    <c:forEach items="${vo.list}" var="subvo" varStatus="substatus">
+                                        <li class="sub-menu-item <c:if test='${subvo.code==subcode}'>sub-active</c:if>">
+                                            <a class="ajaxify"
+                                               href='${ctx}${subvo.url}?pcode=${subvo.pcode}&subcode=${subvo.code}'>${subvo.title}</a>
+                                        </li>
+                                    </c:forEach>
+                                </ul>
+                            </li>
+                        </c:forEach>
                     </ul>
                 </div>
             </div>
@@ -112,7 +114,7 @@
         <div class="page-content-wrapper">
             <div class="page-content" id="page-content">
                 <div class="page-content-body">
-                <sitemesh:body/>
+                    <sitemesh:body/>
                 </div>
             </div>
         </div>
@@ -133,7 +135,7 @@
     <!-- E:page-footer -->
 </div>
 <script type="text/javascript">
-    var ROOTPAth="${ctx}";
+    var ROOTPAth = "${ctx}";
 </script>
 
 <sitemesh:getProperty property="page.jsconfig"/>

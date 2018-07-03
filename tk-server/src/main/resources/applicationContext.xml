@@ -49,7 +49,7 @@
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.tk.mapper"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
-        <property name="annotationClass" value="com.bs.util.annotation.BatisRepository"/>
+        <property name="annotationClass" value="com.tk.util.annotation.BatisRepository"/>
     </bean>
 
 
